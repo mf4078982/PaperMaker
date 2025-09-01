@@ -3,5 +3,11 @@ from django.shortcuts import render,HttpResponse
 # Create your views here.
 
 
-def app(request):
-    return render(request, "home.html")  
+
+def home(request):
+    return render(request, "home.html") 
+def help(request):
+    return render(request, "help.html") 
+
+def send(request):
+    return render(request, "sendfeed.html")
