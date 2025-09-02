@@ -8,3 +8,8 @@ class CustomAdmin(AbstractUser):
         default= 'Teachers'
         
     )
+<<<<<<< HEAD
+=======
+
+# Create your models here.
+>>>>>>> bisma_backend
