@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'PaperMaker.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+       'default': {
         'ENGINE': 'django.db.backends.postgresql',
         
         'NAME':'school_db',
