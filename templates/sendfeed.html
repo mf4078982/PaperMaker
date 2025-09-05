@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load static %}
 
 <!DOCTYPE html>
@@ -94,6 +95,13 @@
         <button id="langBtn" style="padding:6px 10px;border-radius:5px;background:#fff;border:none;cursor:pointer;">Language 🌐</button>
       </div>
     </div>
+=======
+{% extends "base.html" %}
+{% load static %}
+
+{% block text %}
+
+>>>>>>> ffc18c8 (Refactored pages to use base template and added Users/About pages)
 
     <!-- Language Modal -->
     <div class="modal" id="langModal">
@@ -108,6 +116,7 @@
       </div>
     </div>
 
+<<<<<<< HEAD
     <!-- Pricing Modal -->
     <div class="modal-pricing" id="pricingModal">
       <div class="modal-pricing-content">
@@ -188,6 +197,9 @@
         </div>
       </div>
     </div>
+=======
+    
+>>>>>>> ffc18c8 (Refactored pages to use base template and added Users/About pages)
 
     <!-- Feedback Section -->
     <section class="feedback-page" style="max-width:600px;margin:auto;padding:40px 20px;font-family:Arial,sans-serif;color:#1a365d;">
@@ -219,6 +231,7 @@
       </form>
     </section>
 
+<<<<<<< HEAD
     <footer class="footer">
       <div class="links">
         <a href="#">Terms of Services</a>
@@ -229,6 +242,8 @@
       <p>© 2025 OnlinePaperMaker</p>
     </footer>
 
+=======
+>>>>>>> ffc18c8 (Refactored pages to use base template and added Users/About pages)
     <script>
       // Language Modal
       const langBtn = document.getElementById('langBtn');
@@ -237,6 +252,7 @@
       function closeLangModal() { langModal.style.display = 'none'; }
       window.addEventListener('click', (e) => { if (e.target == langModal) langModal.style.display = 'none'; });
 
+<<<<<<< HEAD
       // Pricing Modal
       const pricingBtn = document.getElementById('pricingBtn');
       const pricingModal = document.getElementById('pricingModal');
@@ -267,3 +283,7 @@
 
 </body>
 </html>
+=======
+    </script>
+{% endblock text %}
+>>>>>>> ffc18c8 (Refactored pages to use base template and added Users/About pages)

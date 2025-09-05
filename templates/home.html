@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 {% load static %}
 {% block text %}
@@ -205,6 +206,12 @@
       </div>
     </div>
   </div>
+=======
+{% extends "base.html" %}
+{% load static %}
+{% block text %}
+
+>>>>>>> ffc18c8 (Refactored pages to use base template and added Users/About pages)
 
   <!-- Hero Section -->
   <section class="hero">
@@ -277,6 +284,7 @@
       </div>
     </div>
   </section>
+<<<<<<< HEAD
 
   <!-- Footer -->
   <footer class="footer">
@@ -323,4 +331,20 @@
   </script>
 </body>
 </html>
+=======
+    <script>
+    
+    
+      // Language Modal
+      const langBtn = document.getElementById('langBtn');
+      const langModal = document.getElementById('langModal');
+      langBtn.addEventListener('click', () => { langModal.style.display = 'flex'; });
+      function closeLangModal() { langModal.style.display = 'none'; }
+      window.addEventListener('click', (e) => { if (e.target == langModal) langModal.style.display = 'none'; });
+  </script>
+
+
+  
+  
+>>>>>>> ffc18c8 (Refactored pages to use base template and added Users/About pages)
 {% endblock text %}
