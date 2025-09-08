@@ -1,289 +1,49 @@
-<<<<<<< HEAD
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Test Maker - Send Feedback</title>
-  <link rel="stylesheet" href="{% static 'style.css' %}">
-  <link rel="stylesheet" href="{% static 'style1.css' %}">
-  <style>
-    /* Pricing Modal Styling */
-    .modal-pricing {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      justify-content: center; align-items: center;
-    }
-    .modal-pricing-content {
-      background: #fff;
-      padding: 20px;
-      width: 90%;
-      max-width: 700px;
-      border-radius: 8px;
-      position: relative;
-    }
-    .close-pricing {
-      position: absolute;
-      top: 10px; right: 10px;
-      cursor: pointer;
-      font-size: 20px;
-    }
-    .tabs {
-      display: flex;
-      margin-top: 15px;
-    }
-    .tab {
-      flex: 1;
-      padding: 10px;
-      cursor: pointer;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-    .tab.active {
-      background-color: #f0f0f0;
-      font-weight: bold;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-    table, th, td {
-      border: 1px solid #ccc;
-    }
-    th, td {
-      padding: 10px;
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-
-    <!-- Navbar -->
-    <div class="navbar">
-      <div class="left">
-        <a href="#" class="logo">📑 OnlinePaperMaker</a>
-        <div class="menu">
-          <a href="{% url 'home' %}" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
-            <img src="https://cdn-icons-png.flaticon.com/512/67/67466.png" style="width:20px; height:20px;"> Home
-          </a>
-          <a href="{% url 'help' %}" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
-            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" style="width:20px; height:20px;"> Help
-          </a>
-          <a href="#" id="pricingBtn" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
-            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" style="width:20px; height:20px;"> Pricing
-          </a>
-          <a href="{% url 'send' %}" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:hsl(204,30%,45%);">
-            <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" style="width:22px; height:22px;"> Send Feedback
-          </a>
-          <a href="#" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
-            <img src="https://cdn-icons-png.flaticon.com/512/724/724933.png" style="width:20px; height:20px;"> Install App
-          </a>
-        </div>
-      </div>
-      <div class="right">
-        <div class="auth-buttons">
-          <button class="login">Login</button>
-          <button class="signup">Sign Up</button>
-        </div>
-        <button id="langBtn" style="padding:6px 10px;border-radius:5px;background:#fff;border:none;cursor:pointer;">Language 🌐</button>
-      </div>
-    </div>
-=======
-{% extends "base.html" %}
-{% load static %}
+{% block title %}Send Feedback{% endblock title %}
 
 {% block text %}
 
->>>>>>> ffc18c8 (Refactored pages to use base template and added Users/About pages)
+<section class="feedback-page" style="max-width:600px;margin:auto;padding:40px 20px;font-family:Arial,sans-serif;color:#1a365d;">
+  <h1 style="text-align:center;margin-bottom:15px;">Send Feedback</h1>
+  <p style="text-align:center;font-size:14px;color:#4a5568;margin-bottom:20px;">
+    We value your feedback! Please fill out the form below so we can improve your experience.
+  </p>
 
-    <!-- Language Modal -->
-    <div class="modal" id="langModal">
-      <div class="modal-content">
-        <h3>Select Language</h3>
-        <button>English</button>
-        <button>Urdu</button>
-        <button>Spanish</button>
-        <button>French</button>
-        <br>
-        <button onclick="closeLangModal()">Close</button>
-      </div>
-    </div>
+  <form class="feedback-form" method="POST">
+    {% csrf_token %}
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Your full name" required>
 
-<<<<<<< HEAD
-    <!-- Pricing Modal -->
-    <div class="modal-pricing" id="pricingModal">
-      <div class="modal-pricing-content">
-        <span class="close-pricing" onclick="closePricingModal()">&times;</span>
-        <h2>Pricing</h2>
-        <p>Pro and Enterprise Plan Features</p>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Your email address" required>
 
-        <div class="tabs">
-          <div class="tab active" data-plan="free">Free</div>
-          <div class="tab" data-plan="pro">Pro</div>
-          <div class="tab" data-plan="enterprise">Enterprise</div>
-        </div>
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" name="phone" placeholder="Your phone number">
 
-        <table>
-          <thead>
-            <tr>
-              <th>Features</th>
-              <th class="plan free">Free</th>
-              <th class="plan pro">Pro</th>
-              <th class="plan enterprise">Enterprise</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Question Limit Per Test</td>
-              <td class="plan free">15</td>
-              <td class="plan pro">100</td>
-              <td class="plan enterprise">200</td>
-            </tr>
-            <tr>
-              <td>Monthly Test Generation Limit</td>
-              <td class="plan free">30</td>
-              <td class="plan pro">No Limit</td>
-              <td class="plan enterprise">No Limit</td>
-            </tr>
-            <tr>
-              <td>Answer Sheet Reader Form Storage Capacity</td>
-              <td class="plan free">20</td>
-              <td class="plan pro">250</td>
-              <td class="plan enterprise">1000</td>
-            </tr>
-            <tr>
-              <td>Online Test Participant Limit</td>
-              <td class="plan free">20</td>
-              <td class="plan pro">250</td>
-              <td class="plan enterprise">1000</td>
-            </tr>
-            <tr>
-              <td>Synchronous Online Test Limit</td>
-              <td class="plan free">1</td>
-              <td class="plan pro">20</td>
-              <td class="plan enterprise">50</td>
-            </tr>
-            <tr>
-              <td>Advanced Test Settings</td>
-              <td class="plan free">❌</td>
-              <td class="plan pro">✅</td>
-              <td class="plan enterprise">✅</td>
-            </tr>
-            <tr>
-              <td>Multiple Users</td>
-              <td class="plan free">❌</td>
-              <td class="plan pro">❌</td>
-              <td class="plan enterprise">✅</td>
-            </tr>
-            <tr>
-              <td>HTML Iframe Support</td>
-              <td class="plan free">❌</td>
-              <td class="plan pro">❌</td>
-              <td class="plan enterprise">✅</td>
-            </tr>
-          </tbody>
-        </table>
+    <label for="subject">Subject</label>
+    <input type="text" id="subject" name="subject" placeholder="Feedback subject" required>
 
-        <div style="margin-top:15px;">
-          <button>$0.99/month (Pro)</button>
-          <button>$4.99/month (Enterprise)</button>
-        </div>
-      </div>
-    </div>
-=======
-    
->>>>>>> ffc18c8 (Refactored pages to use base template and added Users/About pages)
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="3" placeholder="Write your feedback here..." required></textarea>
 
-    <!-- Feedback Section -->
-    <section class="feedback-page" style="max-width:600px;margin:auto;padding:40px 20px;font-family:Arial,sans-serif;color:#1a365d;">
-      <h1 style="text-align:center;margin-bottom:15px;">Send Feedback</h1>
-      <p style="text-align:center;font-size:14px;color:#4a5568;margin-bottom:20px;">
-        We value your feedback! Please fill out the form below so we can improve your experience.
-      </p>
-
-      <form class="feedback-form" method="POST">
-        {% csrf_token %}
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your full name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Your email address" required>
-
-        <label for="phone">Phone</label>
-        <input type="text" id="phone" name="phone" placeholder="Your phone number">
-
-        <label for="subject">Subject</label>
-        <input type="text" id="subject" name="subject" placeholder="Feedback subject" required>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="3" placeholder="Write your feedback here..." required></textarea>
-
-        <button type="submit" style="padding:8px 18px;margin-top:10px;background:#1a365d;color:#fff;border:none;border-radius:5px;cursor:pointer;">
-          Submit Feedback
-        </button>
-      </form>
-    </section>
-
-<<<<<<< HEAD
-    <footer class="footer">
-      <div class="links">
-        <a href="#">Terms of Services</a>
-        <a href="#">Cancellation & Refunds</a>
-        <a href="#">Contact</a>
-        <a href="#">About</a>
-      </div>
-      <p>© 2025 OnlinePaperMaker</p>
-    </footer>
-
-=======
->>>>>>> ffc18c8 (Refactored pages to use base template and added Users/About pages)
+    <button type="submit" style="padding:8px 18px;margin-top:10px;background:#1a365d;color:#fff;border:none;border-radius:5px;cursor:pointer;">
+      Submit Feedback
+    </button>
+  </form>
+</section>
     <script>
+    
+    
       // Language Modal
       const langBtn = document.getElementById('langBtn');
       const langModal = document.getElementById('langModal');
       langBtn.addEventListener('click', () => { langModal.style.display = 'flex'; });
       function closeLangModal() { langModal.style.display = 'none'; }
       window.addEventListener('click', (e) => { if (e.target == langModal) langModal.style.display = 'none'; });
+  </script>
 
-<<<<<<< HEAD
-      // Pricing Modal
-      const pricingBtn = document.getElementById('pricingBtn');
-      const pricingModal = document.getElementById('pricingModal');
-      const tabs = document.querySelectorAll('.tab');
-      const planCols = document.querySelectorAll('table .plan');
 
-      pricingBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        pricingModal.style.display = 'flex';
-      });
-      function closePricingModal() { pricingModal.style.display = 'none'; }
 
-      // Tabs logic
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          tabs.forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          const selectedPlan = tab.dataset.plan;
-          planCols.forEach(col => {
-            col.style.display = col.classList.contains(selectedPlan) ? 'table-cell' : 'none';
-          });
-        });
-      });
-
-      // Close modal when clicked outside
-      window.addEventListener('click', (e) => { if (e.target == pricingModal) pricingModal.style.display = 'none'; });
-    </script>
-
-</body>
-</html>
-=======
-    </script>
 {% endblock text %}
->>>>>>> ffc18c8 (Refactored pages to use base template and added Users/About pages)
