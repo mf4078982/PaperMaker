@@ -17,7 +17,7 @@
   <!-- Navbar -->
   <div class="navbar">
     <div class="left">
-      <a href="#" class="logo">📑 OnlinePaperMaker</a>
+      <a href="{% url 'home'%}" class="logo">📑 OnlinePaperMaker</a>
       <div class="menu">
         <a href="{% url 'home' %}" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
           <img src="https://cdn-icons-png.flaticon.com/512/67/67466.png" alt="Home Icon" style="width:20px; height:20px;">
@@ -40,7 +40,10 @@
     </div>
     <div class="right">
       <div class="auth-buttons">
-        <button class="login">Login</button>
+        <a href="{% url 'login_page'%}">
+          <button class="login">Login</button>
+
+        </a>
         <button class="signup">Sign Up</button>
       </div>
       <button id="langBtn" style="padding:6px 10px;border-radius:5px;background:#fff;border:none;cursor:pointer;">Language 🌐</button>
