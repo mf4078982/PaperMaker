@@ -27,14 +27,6 @@
           <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" alt="Help Icon" style="width:20px; height:20px;">
           Help
         </a>
-        <!-- Navbar Pricing button -->
-        <a href="{% url 'userList' %}" 
-   style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
-   <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" 
-        alt="Users Icon" style="width:20px; height:20px;">
-   Users
-</a>
-
 
         <a href="{% url 'send' %}" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:hsl(204,30%,45%);font-weight:500;font-family:Arial,sans-serif;">
           <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Send Feedback Icon" style="width:22px; height:22px;">
@@ -77,9 +69,8 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="links">
-      <a href="#">Terms of Services</a>
-      <a href="#">Cancellation & Refunds</a>
-      <a href="#">Contact</a>
+      <a href="{% url 'term_page' %}">Terms of Services</a>
+      <a href="{% url 'contact_page' %}">Contact</a>
       <a href="{% url 'about' %}">About</a>
     </div>
     <p>© 2025 OnlinePaperMaker</p>

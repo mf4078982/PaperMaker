@@ -435,10 +435,7 @@
   margin: 0;
   font-size: 13px;
   color: #cbd5e0;
-}
-<<<<<<< HEAD
-=======
-
+} 
 /* Container center + max width */
 .container {
   max-width: 900px;
@@ -579,4 +576,3 @@
   border-radius: 8px;
   text-align: center;
 }
->>>>>>> ffc18c8 (Refactored pages to use base template and added Users/About pages)

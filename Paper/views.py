@@ -17,3 +17,9 @@ def about(request):
 
 def userList(request):
     return render(request, 'user_list.html')
+
+def contact_page(request):
+    return render(request,'contact.html')
+
+def term_page(request):
+    return render(request, "term_page.html")
