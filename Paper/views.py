@@ -28,3 +28,6 @@ def login_page(request):
     return render(request, "login.html")
 def register(request):
     return render(request, "register.html")
+
+def navbar_user(request):
+    return render(request, "navbar_user.html")

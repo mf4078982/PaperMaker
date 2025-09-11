@@ -1,0 +1,108 @@
+/* Navbar container */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #afccd3;
+  color: rgb(90, 124, 158);
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 26px;   
+  background: #2d3e50;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  flex-wrap: wrap;
+}
+
+.navbar .left {
+  display: flex;
+  align-items: center;
+  gap: 20px;  
+  flex-wrap: wrap;
+}
+
+.navbar .logo {
+  font-size: 19px;   
+  font-weight: 700;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navbar .menu {
+  display: flex;
+  gap: 10px;   
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar .menu a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  padding: 7px 12px;   
+  border-radius: 4px;
+  position: relative;
+  font-size: 14px;     
+}
+
+.navbar .menu a:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* Dropdown for Send Feedback */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 38px;   
+  left: 0;
+  background: #fff;
+  color: #000;
+  min-width: 155px;   
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  z-index: 100;
+  font-size: 14px;    /
+}
+
+.dropdown-content a {
+  display: flex;
+  align-items: center;
+  gap: 8px;           
+  padding: 8px 12px;  
+  color: #123;
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  background: #f0f0f0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.navbar .right {
+  display: flex;
+  gap: 10px;   
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+
+.auth-buttons button {
+  padding: 7px 14px;   
+  border-radius: 5px;
+  font-size: 14px;     
+  cursor: pointer;
+}

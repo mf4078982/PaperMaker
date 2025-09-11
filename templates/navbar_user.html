@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  
+
+  <!-- Tumhari custom CSS -->
+  <link rel="stylesheet" href="{% static 'style_user.css' %}">
+
+</head>
+<body>
+
+<!-- Navbar for Logged-in User -->
+<nav class="navbar">
+  <div class="left">
+    <a href="{% url 'home' %}" class="logo">📑 PaperMaker</a>
+    <div class="menu">
+        <a href="{% url 'home' %}" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
+          <img src="https://cdn-icons-png.flaticon.com/512/67/67466.png" alt="Home Icon" style="width:20px; height:20px;">
+          Home
+        </a>
+
+
+       <a href="#" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
+        <img src="https://cdn-icons-png.flaticon.com/128/17138/17138146.png" alt="Create Paper Icon" style="width:20px; height:20px;">
+        Create Paper
+      </a>
+
+      <a href="#" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
+        <img src="https://cdn-icons-png.flaticon.com/128/171/171322.png" alt="My Papers Icon" style="width:20px; height:20px;">
+        My Papers
+      </a>
+
+      <a href="#" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
+        <img src="https://cdn-icons-png.flaticon.com/128/1077/1077114.png" alt="Profile Icon" style="width:20px; height:20px;">
+        Profile
+      </a>
+
+      <a href="#" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
+        <img src="https://cdn-icons-png.flaticon.com/128/9637/9637797.png" alt="Settings Icon" style="width:20px; height:20px;">
+        Settings
+      </a>
+
+      <a href="#" style="display:flex;align-items:center;gap:5px;text-decoration:none;color:hsl(204,30%,45%);">
+        <img src="https://cdn-icons-png.flaticon.com/128/1828/1828479.png" alt="Logout Icon" style="width:20px; height:20px;">
+        Logout
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container mt-4">
+  {% block content %}
+  <h2>Welcome to PaperMaker User Dashboard</h2>
+  {% endblock content %}
+</div>
+
+<!-- Bootstrap JS -->
+</body>
+</html>

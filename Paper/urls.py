@@ -12,7 +12,8 @@ urlpatterns = [
     path("term/",views.term_page,name='term_page'),
     path("login/",views.login_page,name='login_page'),
     path("register/",views.register,name="register"),
-    
+    path("navbar_user/", views.navbar_user, name="navbar_user"),
+
     
     
 ]
