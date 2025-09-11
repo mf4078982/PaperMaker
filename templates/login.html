@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock title %}
+
+{% block text %}
+<section class="login-section">
+  <div class="login-card">
+    <h2>Login</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="input-box">
+        <input type="text" placeholder="Username or Email" name="username" required>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Password" name="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <div class="extra-links">
+      <p>Don't have an account?
+        <a href="{% url 'register'%}">Register</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Background */
+  .login-section {
+    height: 80vh; /* 👈 thoda kam height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #afccd3;
+  }
+
+  /* Card */
+  .login-card {
+    background: #fff;
+    padding: 35px 30px;
+    border-radius: 12px;
+    width: 360px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+
+    /* animation */
+    opacity: 0;
+    transform: translateY(-40px);
+    animation: slideDown 0.8s ease-out forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Hover effect */
+  .login-card:hover {
+    transform: translateY(-8px); /* thoda upar lift kare */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Heading */
+  .login-card h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #1e3a8a;
+  }
+
+  /* Input box */
+  .input-box {
+    margin: 12px 0;
+  }
+
+  .input-box input {
+    width: 80%;
+    padding: 12px;
+    border: 1px solid #342354;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+  }
+
+  .input-box input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 5px rgba(37,99,235,0.3);
+  }
+
+  /* Button */
+  .login-card button {
+    width: 90%;
+    padding: 12px;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 10px;
+    transition: 0.3s;
+  }
+
+  .login-card button:hover {
+    background: #1e40af;
+  }
+
+  /* Links */
+  .extra-links {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .extra-links a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .extra-links a:hover {
+    text-decoration: underline;
+  }
+
+  /* Slide down animation */
+  @keyframes slideDown {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+  <script>
+  
+      // Language Modal
+      const langBtn = document.getElementById('langBtn');
+      const langModal = document.getElementById('langModal');
+      langBtn.addEventListener('click', () => { langModal.style.display = 'flex'; });
+      function closeLangModal() { langModal.style.display = 'none'; }
+      window.addEventListener('click', (e) => { if (e.target == langModal) langModal.style.display = 'none'; });
+  </script>
+
+{% endblock text %}

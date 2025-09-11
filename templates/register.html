@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register{% endblock title %}
+
+{% block text %}
+<section class="register-section">
+  <div class="register-card">
+    <h2>Create an Account</h2>
+    <p class="subtitle">Join us today! It only takes a few steps</p>
+
+    <form method="POST">
+      {% csrf_token %}
+      
+      <div class="input-box">
+        <input type="text" name="fullname" placeholder="Full Name" required>
+      </div>
+
+      <div class="input-box">
+        <input type="email" name="email" placeholder="Email Address" required>
+      </div>
+
+
+      <div class="input-box">
+        <input type="password" name="password" placeholder="Password" required>
+      </div>
+
+      <div class="input-box">
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+      </div>
+
+      <div class="terms">
+        <input type="checkbox" id="agree" required>
+        <label for="agree">I agree to the <a href="#">Terms & Conditions</a></label>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="extra-links">
+      Already have an account? <a href="{% url 'login_page' %}">Login</a>
+    </div>
+  </div>
+</section>
+  <script>
+  
+      // Language Modal
+      const langBtn = document.getElementById('langBtn');
+      const langModal = document.getElementById('langModal');
+      langBtn.addEventListener('click', () => { langModal.style.display = 'flex'; });
+      function closeLangModal() { langModal.style.display = 'none'; }
+      window.addEventListener('click', (e) => { if (e.target == langModal) langModal.style.display = 'none'; });
+  </script>
+
+{% endblock text %}

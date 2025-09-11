@@ -23,3 +23,8 @@ def contact_page(request):
 
 def term_page(request):
     return render(request, "term_page.html")
+
+def login_page(request):
+    return render(request, "login.html")
+def register(request):
+    return render(request, "register.html")

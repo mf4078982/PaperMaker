@@ -43,3 +43,131 @@
       background: #2c4a7a;
     }
   
+/* Background */
+.register-section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #afccd3;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background-size: 200% 200%;
+  animation: gradientMove 6s infinite alternate;
+}
+
+/* Card with glass effect */
+.register-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px 35px;
+  border-radius: 20px;
+  width: 420px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.8s ease-in-out;
+  border: 2px solid rgba(255,255,255,0.4);
+}
+
+/* Heading */
+.register-card h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+.register-card .subtitle {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+/* Input box */
+.input-box {
+  margin: 14px 0;
+  position: relative;
+}
+
+.input-box input {
+  width: 90%;
+  padding: 13px 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+  background: #f9fafb;
+}
+
+.input-box input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 8px rgba(59,130,246,0.3);
+}
+
+/* Terms */
+.terms {
+  text-align: left;
+  margin: 14px 0 18px;
+  font-size: 14px;
+  color: #333;
+}
+
+.terms a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+/* Button with gradient */
+.register-card button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: all 0.4s ease;
+  box-shadow: 0 5px 15px rgba(59,130,246,0.3);
+}
+
+.register-card button:hover {
+  background-position: right center;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(16,185,129,0.4);
+}
+
+/* Links */
+.extra-links {
+  margin-top: 20px;
+  font-size: 15px;
+  color: #444;
+}
+
+.extra-links a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.extra-links a:hover {
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-25px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
