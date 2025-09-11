@@ -11,10 +11,7 @@ urlpatterns = [
     path('contact/',views.contact_page,name='contact_page'),
     path("term/",views.term_page,name='term_page'),
     path("login/",views.login_page,name='login_page'),
-<<<<<<< HEAD
     path("register/",views.register,name="register"),
-=======
->>>>>>> eac4ced3b94d716b349d0ce7289d1a9e71433986
     
     
     

@@ -4,62 +4,35 @@
 {% block title %}Login{% endblock title %}
 
 {% block text %}
-<<<<<<< HEAD
 <section class="login-section">
   <div class="login-card">
     <h2>Login</h2>
     <form method="POST">
       {% csrf_token %}
+      <!-- Username or Email -->
       <div class="input-box">
         <input type="text" placeholder="Username or Email" name="username" required>
       </div>
+      <!-- Password -->
       <div class="input-box">
         <input type="password" placeholder="Password" name="password" required>
       </div>
+      <!-- Submit -->
       <button type="submit">Login</button>
     </form>
+
     <div class="extra-links">
       <p>Don't have an account?
-        <a href="{% url 'register'%}">Register</a>
-=======
-<section style="display:flex;justify-content:center;align-items:center;
-               height:90vh;background:#f4f6f9;">
-  <div style="background:#fff;padding:40px 30px;border-radius:15px;
-              box-shadow:0 8px 20px rgba(0,0,0,0.1);width:360px;animation:fadeIn 1s ease;">
-    <h2 style="text-align:center;margin-bottom:25px;color:#2b6cb0;font-size:26px;">
-      Welcome Back 👋
-    </h2>
-    <form method="POST">
-      {% csrf_token %}
-      <input type="text" placeholder="Username or Email" name="username" required 
-             style="width:100%;padding:14px;margin:10px 0;border:1px solid #ccc;
-                    border-radius:8px;font-size:15px;transition:0.3s;">
-      <input type="password" placeholder="Password" name="password" required 
-             style="width:100%;padding:14px;margin:10px 0;border:1px solid #ccc;
-                    border-radius:8px;font-size:15px;transition:0.3s;">
-      <button type="submit" 
-              style="width:100%;padding:14px;background:#2b6cb0;color:#fff;
-                     border:none;border-radius:8px;cursor:pointer;
-                     font-weight:bold;font-size:16px;transition:0.3s;">
-        Login
-      </button>
-    </form>
-    <div style="text-align:center;margin-top:18px;font-size:14px;color:#555;">
-      <p>Don't have an account? 
-        <a href="#" style="color:#2b6cb0;font-weight:bold;text-decoration:none;">
-          Register
-        </a>
->>>>>>> eac4ced3b94d716b349d0ce7289d1a9e71433986
+        <a href="{% url 'register' %}">Register</a>
       </p>
     </div>
   </div>
 </section>
 
 <style>
-<<<<<<< HEAD
   /* Background */
   .login-section {
-    height: 80vh; /* 👈 thoda kam height */
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,7 +48,6 @@
     text-align: center;
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 
-    /* animation */
     opacity: 0;
     transform: translateY(-40px);
     animation: slideDown 0.8s ease-out forwards;
@@ -84,7 +56,7 @@
 
   /* Hover effect */
   .login-card:hover {
-    transform: translateY(-8px); /* thoda upar lift kare */
+    transform: translateY(-8px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
   }
 
@@ -159,31 +131,4 @@
     }
   }
 </style>
-
-  <script>
-  
-      // Language Modal
-      const langBtn = document.getElementById('langBtn');
-      const langModal = document.getElementById('langModal');
-      langBtn.addEventListener('click', () => { langModal.style.display = 'flex'; });
-      function closeLangModal() { langModal.style.display = 'none'; }
-      window.addEventListener('click', (e) => { if (e.target == langModal) langModal.style.display = 'none'; });
-  </script>
-
-=======
-  input:focus {
-    border-color:#2b6cb0;
-    box-shadow:0 0 6px rgba(43,108,176,0.4);
-    outline:none;
-  }
-  button:hover {
-    background:#1e4e8c;
-    transform:scale(1.02);
-  }
-  @keyframes fadeIn {
-    from {opacity:0;transform:translateY(-20px);}
-    to {opacity:1;transform:translateY(0);}
-  }
-</style>
->>>>>>> eac4ced3b94d716b349d0ce7289d1a9e71433986
 {% endblock text %}
