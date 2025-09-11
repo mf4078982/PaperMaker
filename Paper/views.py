@@ -25,6 +25,10 @@ def term_page(request):
     return render(request, "term_page.html")
 
 def login_page(request):
+<<<<<<< HEAD
     return render(request, "login.html")
 def register(request):
     return render(request, "register.html")
+=======
+    return render(request, "login.html")
+>>>>>>> eac4ced3b94d716b349d0ce7289d1a9e71433986
