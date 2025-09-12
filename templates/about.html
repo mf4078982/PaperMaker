@@ -40,13 +40,5 @@
       </a>
     </div>
   </section>
-  <script>
-      // Language Modal
-      const langBtn = document.getElementById('langBtn');
-      const langModal = document.getElementById('langModal');
-      langBtn.addEventListener('click', () => { langModal.style.display = 'flex'; });
-      function closeLangModal() { langModal.style.display = 'none'; }
-      window.addEventListener('click', (e) => { if (e.target == langModal) langModal.style.display = 'none'; });
-
-    </script>
+  
 {% endblock text %}
