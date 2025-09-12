@@ -1,0 +1,52 @@
+/* Messages Container */
+.messages {
+  width: 90%;
+  margin: 15px auto;
+}
+
+/* Base Alert Style */
+.alert {
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  position: relative;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  animation: slideDown 0.4s ease-in-out;
+}
+
+/* Success Message */
+.alert-success {
+  background-color: #4CAF50;
+}
+
+/* Error Message */
+.alert-error {
+  background-color: #f44336;
+}
+
+/* Warning Message */
+.alert-warning {
+  background-color: #ff9800;
+}
+
+/* Info Message */
+.alert-info {
+  background-color: #2196F3;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Animation */
+@keyframes slideDown {
+  from {opacity: 0; transform: translateY(-10px);}
+  to {opacity: 1; transform: translateY(0);}
+}

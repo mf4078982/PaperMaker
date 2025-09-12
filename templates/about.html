@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About - Online Paper Maker{% endblock %}
+
+{% block text %}
+  <!-- About Section -->
+  <section class="about-page" style="padding:40px;max-width:900px;margin:auto;">
+    <h1 style="text-align:center;color:#1a365d;">About Online Paper Maker</h1>
+    <p style="font-size:16px;color:#4a5568;line-height:1.6;margin-top:20px;">
+      Online Paper Maker is a simple yet powerful web application designed to help teachers,
+      students, and institutes prepare professional-quality test papers in minutes.
+      Our mission is to make assessment creation easier, faster, and more reliable.
+    </p>
+
+    <h2 style="margin-top:30px;color:#2b4c7e;">Our Mission</h2>
+    <p style="color:#4a5568;line-height:1.6;">
+      To empower educators worldwide by providing easy-to-use tools for test preparation,
+      online exams, and answer sheet evaluation without technical hurdles.
+    </p>
+
+    <h2 style="margin-top:30px;color:#2b4c7e;">Key Features</h2>
+    <ul style="margin-left:20px; color:#4a5568; line-height:1.8;">
+      <li>Convert images of questions into PDF test papers</li>
+      <li>Read answer sheets using device camera</li>
+      <li>Publish secure online exams with time limits</li>
+      <li>Crop questions and remove unnecessary content</li>
+      <li>Multiple subscription plans (Free, Pro, Enterprise)</li>
+    </ul>
+
+    <h2 style="margin-top:30px;color:#2b4c7e;">Our Team</h2>
+    <p style="color:#4a5568;line-height:1.6;">
+      We are a team of developers and educators passionate about digital learning.
+      Our goal is to simplify teaching and examination processes for everyone.
+    </p>
+
+    <div style="text-align:center; margin-top:30px;">
+      <a href="{% url 'home' %}" class="btn" style="padding:10px 20px;background:#1a365d;color:#fff;border:none;border-radius:5px;text-decoration:none;cursor:pointer;">
+        Back to Home
+      </a>
+    </div>
+  </section>
+  <script>
+      // Language Modal
+      const langBtn = document.getElementById('langBtn');
+      const langModal = document.getElementById('langModal');
+      langBtn.addEventListener('click', () => { langModal.style.display = 'flex'; });
+      function closeLangModal() { langModal.style.display = 'none'; }
+      window.addEventListener('click', (e) => { if (e.target == langModal) langModal.style.display = 'none'; });
+
+    </script>
+{% endblock text %}

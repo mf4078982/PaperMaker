@@ -1,85 +1,12 @@
+
+{% extends "base.html" %}
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Test Maker - Help</title>
-  <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-
-  <!-- Navbar -->
-  <div class="navbar">
-    <div class="left">
-      <a href="index.html" class="logo">📑 OnlinePaperMaker</a>
-      <div class="menu">
-        <a href="{% url "home" %}" style="display: flex; align-items: center; gap: 5px; text-decoration: none; color: hsl(204, 30%, 45%);">
-          <img src="https://cdn-icons-png.flaticon.com/512/67/67466.png" alt="Home Icon" style="width:20px; height:20px;">
-          Home
-        </a>
-        <a href="{% url 'help' %}" style="display: flex; align-items: center; gap: 5px; text-decoration: none; color: hsl(204, 30%, 45%);">
-          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" alt="Help Icon" style="width:20px; height:20px;">
-          Help
-        </a>
-        <a href="#" style="display: flex; align-items: center; gap: 5px; text-decoration: none; color: hsl(204, 30%, 45%);">
-          <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Pricing Icon" style="width:20px; height:20px;">
-          Pricing
-        </a>
-        <a href="{% url 'send' %}" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: hsl(204, 30%, 45%); font-weight: 500; font-family: Arial, sans-serif;">
-          <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Send Feedback Icon" style="width:22px; height:22px;">
-          Send Feedback
-        </a>
-        <a href="#" style="display: flex; align-items: center; gap: 5px; text-decoration: none; color: hsl(204, 30%, 45%);">
-          <img src="https://cdn-icons-png.flaticon.com/512/724/724933.png" alt="Install App Icon" style="width:20px; height:20px;">
-          Install App
-        </a>
-      </div>
-    </div>
-    <div class="right">
-      <div class="auth-buttons">
-        <button class="login">Login</button>
-        <button class="signup">Sign Up</button>
-      </div>
-      <button id="langBtn" style="padding:6px 10px; border-radius:5px; background:#fff; border:none; cursor:pointer;">Language 🌐</button>
-    </div>
-  </div>
-
-  <!-- Language Modal -->
-  <div class="modal" id="langModal">
-    <div class="modal-content">
-      <h3>Select Language</h3>
-      <button>English</button>
-      <button>Urdu</button>
-      <button>Spanish</button>
-      <button>French</button>
-      <br>
-      <button onclick="closeLangModal()">Close</button>
-    </div>
-  </div>
-
-  <script>
-    const langBtn = document.getElementById('langBtn');
-    const langModal = document.getElementById('langModal');
-
-    langBtn.addEventListener('click', () => {
-      langModal.style.display = 'flex';
-    });
-
-    function closeLangModal() {
-      langModal.style.display = 'none';
-    }
-
-    window.addEventListener('click', (e) => {
-      if (e.target == langModal) langModal.style.display = 'none';
-    });
-  </script>
+{% block text %}
 
   <!-- Help Section -->
-  <section class="help-page" style="padding: 40px; max-width: 900px; margin: auto;">
-    <h1 style="text-align: center; color: #1a365d;">Help - Online Paper Maker</h1>
-    <p style="font-size: 16px; color: #4a5568; line-height: 1.6; margin-top: 20px;">
+  <section class="help-page" style="padding:40px;max-width:900px;margin:auto;">
+    <h1 style="text-align:center;color:#1a365d;">Help - Online Paper Maker</h1>
+    <p style="font-size:16px;color:#4a5568;line-height:1.6;margin-top:20px;">
       Welcome to the Online Paper Maker Help Page! Here you will find guidance on how to use all the features of our application.
       <br><br>
       <strong>Prepare Test:</strong> Convert your multiple choice questions from image format to PDF test papers easily. 
@@ -93,21 +20,19 @@
       <br><br>
       For further assistance, you can use the "Send Feedback" button in the navbar to contact us.
     </p>
-    <div style="text-align:center; margin-top: 30px;">
-      <a href="{% url 'home' %}" class="btn" style="padding:10px 20px; background:#1a365d; color:#fff; border:none; border-radius:5px; text-decoration:none; cursor:pointer;">Back to Home</a>
+    <div style="text-align:center; margin-top:30px;">
+      <a href="{% url 'home' %}" class="btn" style="padding:10px 20px;background:#1a365d;color:#fff;border:none;border-radius:5px;text-decoration:none;cursor:pointer;">Back to Home</a>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="links">
-      <a href="#">Terms of Services</a>
-      <a href="#">Cancellation & Refunds</a>
-      <a href="#">Contact</a>
-      <a href="#">About</a>
-    </div>
-    <p>© 2025 OnlinePaperMaker</p>
-  </footer>
+  <script>
+  
+      // Language Modal
+      const langBtn = document.getElementById('langBtn');
+      const langModal = document.getElementById('langModal');
+      langBtn.addEventListener('click', () => { langModal.style.display = 'flex'; });
+      function closeLangModal() { langModal.style.display = 'none'; }
+      window.addEventListener('click', (e) => { if (e.target == langModal) langModal.style.display = 'none'; });
+  </script>
 
-</body>
-</html>
+{% endblock text %}
