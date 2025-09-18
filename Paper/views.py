@@ -1,7 +1,6 @@
 from django.shortcuts import render,HttpResponse
 
-# Create your views here.
-
+# Create your views h
 
 
 def home(request):
@@ -31,3 +30,9 @@ def register(request):
 
 def navbar_user(request):
     return render(request, "navbar_user.html")
+
+def createpaper(request):
+    return render(request, "createpaper.html")
+
+def previewpage(request):
+    return render(request, 'Previewpage.html')

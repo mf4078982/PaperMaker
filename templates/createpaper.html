@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Paper</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'style_user.css' %}">
+</head>
+<body>
+
+<div class="form-wrapper">
+  <div class="form-card shadow-lg">
+    <h2 class="mb-4 text-center text-gradient">📝 Create Your Paper</h2>
+    <form id="paperForm">
+
+      <!-- Paper Title -->
+      <div class="mb-3">
+        <label class="form-label">📄 Paper Title</label>
+        <input type="text" class="form-control input-custom" id="title" placeholder="e.g. Mid Term Test">
+      </div>
+
+      <!-- Class Name -->
+      <div class="mb-3">
+        <label class="form-label">🏫 Class Name</label>
+        <select class="form-select input-custom" id="class_name">
+          <option selected disabled>Choose Class</option>
+          <option>Class 5</option>
+          <option>Class 6</option>
+          <option>Class 7</option>
+          <option>Class 8</option>
+          <option>Class 9</option>
+          <option>Class 10</option>
+        </select>
+      </div>
+
+      <!-- Subject -->
+      <div class="mb-3">
+        <label class="form-label">📚 Select Subject</label>
+        <select class="form-select input-custom" id="subject">
+          <option selected disabled>Choose Subject</option>
+          <option>Math</option>
+          <option>English</option>
+          <option>Science</option>
+        </select>
+      </div>
+
+      <!-- Number of Questions -->
+      <div class="mb-3">
+        <label class="form-label">🔢 Number of Questions</label>
+        <input type="number" class="form-control input-custom" id="num_questions" min="1" max="50" value="10">
+      </div>
+
+      <!-- Difficulty -->
+      <div class="mb-3">
+        <label class="form-label">⚡ Difficulty</label>
+        <select class="form-select input-custom" id="difficulty">
+          <option>Easy</option>
+          <option>Medium</option>
+          <option>Hard</option>
+        </select>
+      </div>
+
+      <!-- Paper Type -->
+      <div class="mb-3">
+        <label class="form-label">✍️ Paper Type</label>
+        <select class="form-select input-custom" id="type">
+          <option>MCQ</option>
+          <option>Short Questions</option>
+          <option>Long Questions</option>
+          <option>Mixed</option>
+        </select>
+      </div>
+
+      <button type="button" class="btn btn-gradient w-100 mt-3" onclick="generatePreview()">✨ Generate Paper</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function generatePreview() {
+    const title = document.getElementById("title").value;
+    const className = document.getElementById("class_name").value;
+    const subject = document.getElementById("subject").value;
+    const numQ = document.getElementById("num_questions").value;
+    const difficulty = document.getElementById("difficulty").value;
+    const type = document.getElementById("type").value;
+
+    
+  }
+</script>
+
+</body>
+</html>
