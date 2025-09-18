@@ -86,7 +86,8 @@
     const difficulty = document.getElementById("difficulty").value;
     const type = document.getElementById("type").value;
 
-    
+    // Redirect with all query params
+    window.location.href = `/preview/?title=${title}&class=${className}&subject=${subject}&numQ=${numQ}&difficulty=${difficulty}&type=${type}`;
   }
 </script>
 
