@@ -1,0 +1,303 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Paper Generator</title>
+  <link rel="stylesheet" href="{% static 'Paper_css/style.css' %}?v=4">
+
+</head>
+
+<body>
+  <!-- Paper Content Wrapper -->
+  <div id="paper-content" class="a4-paper">
+    <!-- Top Section -->
+    <div class="top-section">
+      <div class="logo-box">
+        <img src="{% static 'images/logo/images.png' %}" alt="Logo">
+      </div>
+      <div class="school-name">
+        <h1>RAEES GRAMMAR HIGH SCHOOL</h1>
+        <p>Kot Ali Garh Kasur - 0321-5252617</p>
+      </div>
+      <div class="marks-box">
+        <p><b>Total Marks:</b> ______</p>
+        <p><b>Obtained:</b> ______</p>
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <div class="info-line"><span class="info-label">Name:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Class:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Date:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Roll No:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Teacher Sign:</span> <span class="underline"></span></div>
+    </div>
+
+    <table class="question-table">
+      <tr>
+        <th>Question No</th>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <th>Obtained Marks</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <!-- Paper Title -->
+    <div class="paper-title">
+      <span id="paperTitle">Paper {{subject}} Class {{class_name}} {{exam}} {{year}}</span>
+      <button class="edit-btn" id="editBtn">✏️</button>
+      <input type="text" id="titleInput" class="title-input">
+      <button class="save-btn" id="saveBtn">Save</button>
+    </div>
+
+    <div class="my_line"></div>
+
+    <!-- Popup Form -->
+    <div id="formPopup" class="form-popup">
+      <div class="form-content">
+        <span id="closeFormBtn" class="close-btn">&times;</span>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <!-- 👇 New Circle Field -->
+
+          <button type="submit" id="generateBtn" class="submit-btn">Generate Worksheet</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Worksheet Blocks -->
+    <div class="worksheet" id="worksheet">
+
+      {% for question in all_questions %}
+
+      <!-- CASE 1: Write Alphabet -->
+      {% if question.heading == "write_alphabet" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write Alphabet
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        {% for image in question.images %}
+        {% if forloop.counter0|divisibleby:4 %}<div class="practice-row">{% endif %}
+          <img src="{% static image %}" alt="{{ image }}">
+          {% if forloop.counter|divisibleby:4 or forloop.last %}
+        </div>{% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- CASE 2: Matching -->
+      {% if question.heading == "matching" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Match the Letters
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="matching-wrapper">
+          <div class="matching-col">
+            {% for letter in question.left_letters %}
+            <div class="matching-item">
+              <p>{{ letter }}</p>
+              <span class="dot"></span>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="matching-col">
+            {% for letter in question.right_letters %}
+            <div class="matching-item">
+              <p>{{ letter }}</p>
+              <span class="dot"></span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 3: Picture Match -->
+      {% if question.heading == "picture_match" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Match with Pictures
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="matching-wrapper">
+          <div class="matching-col">
+            {% for letter in question.left_letters %}
+            <div class="matching-item">
+              <p>{{ letter }}</p>
+              <span class="dot"></span>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="matching-col">
+            {% for img in question.images %}
+            <div class="matching-item">
+              <img src="{% static img %}" alt="{{ img }}">
+              <span class="dot"></span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 4: Write First Letter -->
+      {% if question.heading == "Write_first_letter" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write first letter of each picture
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="worksheet-container">
+          {% for item in question.worksheet_items %}
+          {% if forloop.counter0|divisibleby:2 %}<div class="worksheet-row">{% endif %}
+
+            <div class="worksheet-item">
+              <img src="{% static item.image %}" alt="{{ item.letter }}">
+              <div class="lines">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
+            </div>
+
+            {% if forloop.counter|divisibleby:2 or forloop.last %}
+          </div>{% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 5: Circle The Letter -->
+      {% if question.heading == "Circle_the_alphabet" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Circle the Letter {{ question.target_letter }}
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="question-block">
+          <div class="circle-grid">
+            {% for letter in question.grid %}
+            <div>{{ letter }}</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div
+    style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;"
+    class="action-buttons">
+    <button type="button" id="openFormBtn" class="add-btn" style="margin: 0;">+ Add Question</button>
+
+    <button type="button" onclick="generatePDF()" class="download-btn"
+      style="margin: 0; padding: 10px 20px; font-size: 16px; text-decoration: none; color: inherit; display: inline-block;">🖨️ Download PDF</button>
+
+
+    <form method="post" action="{% url 'reset_paper' %}" style="margin: 0;">
+      {% csrf_token %}
+      <button type="submit" class="reset-btn" style="margin: 0;">Reset All</button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const headingSelect = document.getElementById("id_heading");
+      const circleAlphabetField = document.getElementById("id_circle_alphabet");
+      const circleAlphabetLabel = document.querySelector("label[for='id_circle_alphabet']");
+
+      // Hide by default
+      if (circleAlphabetField && circleAlphabetLabel) {
+        circleAlphabetField.parentElement.style.display = "none";
+      }
+
+      // Show only when "Circle the alphabet" selected
+      headingSelect.addEventListener("change", function () {
+        if (this.value === "Circle_the_alphabet") {
+          circleAlphabetField.parentElement.style.display = "block";
+        } else {
+          circleAlphabetField.parentElement.style.display = "none";
+        }
+      });
+    });
+  </script>
+
+  <!-- JS Files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function generatePDF() {
+      const element = document.getElementById('paper-content');
+
+      // Temporarily remove border and shadow so they don't affect capture
+      const origBorder = element.style.border;
+      const origShadow = element.style.boxShadow;
+      element.style.border = 'none';
+      element.style.boxShadow = 'none';
+      document.body.style.background = '#fff';
+
+      const opt = {
+        margin: [5, 5, 5, 5], // small margins in mm
+        filename: 'paper.pdf',
+        image: { type: 'jpeg', quality: 1.0 },
+        pagebreak: {
+          mode: ['css', 'legacy']
+        },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          letterRendering: true,
+          scrollX: 0,
+          scrollY: 0
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf()
+        .set(opt)
+        .from(element)
+        .save()
+        .then(() => {
+          // Restore styles after PDF is saved
+          element.style.border = origBorder;
+          element.style.boxShadow = origShadow;
+          document.body.style.background = '#e0e0e0';
+        });
+    }
+  </script>
+  <script src="{% static 'Paper_js/paper_tamp1.js' %}"></script>
+  <script src="{% static 'Paper_js/paper_tamp.js' %}"></script>
+  <script src="{% static 'Paper_js/reset.js' %}"></script>
+</body>
+
+</html>

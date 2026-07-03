@@ -1,0 +1,1405 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+body {
+  margin: 0;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  background: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.action-buttons {
+  margin-top: 25px;
+}
+
+/* Paper Container for A4 Size */
+.a4-paper {
+  background: #fff;
+  width: 210mm;
+  /* NO min-height - let content define height naturally */
+  margin: 0;
+  box-sizing: border-box;
+  border: 3px solid #000;
+  padding: 15mm;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Paper Section */
+.paper {
+  border: 2px solid #000;
+  padding: 20px 30px;
+  background: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px double #000;
+  padding: 10px 0 20px 0;
+  margin-bottom: 15px;
+  background: transparent;
+}
+
+.logo-box img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: multiply;
+}
+
+.school-name {
+  text-align: center;
+  flex: 1;
+  padding: 0 15px;
+}
+
+.school-name h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: #000;
+  letter-spacing: 1px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.school-name p {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 15px;
+  color: #444;
+  margin: 5px 0 0 0;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.marks-box {
+  border: 2px solid #000;
+  padding: 10px 15px;
+  font-size: 14px;
+  background-color: #fff;
+  border-radius: 6px;
+  min-width: 130px;
+}
+
+.marks-box p {
+  margin: 4px 0;
+  white-space: nowrap;
+}
+
+.info-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin: 15px 0 20px 0;
+  font-size: 14px;
+}
+
+.info-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  margin: 0;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.info-line:nth-child(1) {
+  flex: 2.2;
+}
+
+.info-line:nth-child(2) {
+  flex: 1.2;
+}
+
+.info-line:nth-child(3) {
+  flex: 1.5;
+}
+
+.info-line:nth-child(4) {
+  flex: 1.2;
+}
+
+.info-line:nth-child(5) {
+  flex: 1.8;
+}
+
+.info-label {
+  font-weight: bold;
+  color: #111;
+}
+
+.underline {
+  flex: 1;
+  border-bottom: 1.5px solid #000;
+  height: 14px;
+}
+
+.question-wrapper {
+  break-inside: auto;
+  page-break-inside: auto;
+  margin-bottom: 5px;
+}
+
+.question-table,
+.matching-wrapper,
+.practice-row,
+.worksheet-container,
+.question-block,
+.top-section,
+.info-section {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Table */
+.question-table {
+  font-family: 'Playfair Display', serif;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 16px;
+  border: 3px solid #121414f7;
+}
+
+.question-table th,
+.question-table td {
+  border: 2px solid #080a0a;
+  padding: 8px;
+}
+
+.question-table th {
+  background: #e0e0e0;
+  font-weight: 600;
+}
+
+.question-table td {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Paper Title */
+.paper-title {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 20px 0;
+  color: #0c0608;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: hsl(206, 5%, 72%);
+}
+
+.save-btn {
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+}
+
+.title-input {
+  padding: 5px;
+  font-size: 16px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  display: none;
+  width: 60%;
+}
+
+/* Question Section */
+.questions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.questions div {
+  flex: 1 1 calc(25% - 10px);
+  text-align: center;
+}
+
+.questions img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .questions div {
+    flex: 1 1 calc(50% - 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .questions div {
+    flex: 1 1 100%;
+  }
+}
+
+.question {
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background: #fdfdfd;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Buttons */
+.add-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: #45a049;
+}
+
+/* Reset Button */
+.reset-btn {
+  display: block;
+  margin: 10px auto 30px auto;
+  /* center align like Add button */
+  padding: 10px 25px;
+  background-color: #f44336;
+  /* Red color for reset */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reset-btn:hover {
+  background-color: #d32f2f;
+  /* Darker red on hover */
+  transform: scale(1.05);
+}
+
+.reset-btn:active {
+  transform: scale(0.98);
+}
+
+
+/* Line */
+.line {
+  border-bottom: 2px solid #000;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.line img {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+}
+
+.my_line {
+  border-bottom: 2px solid #000;
+  width: 100%;
+  margin: 15px 0;
+}
+
+/* Popup */
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.form-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background: #0b7dda;
+}
+
+/* Worksheet */
+.worksheet {
+  width: calc(100% - 60px);
+  margin: 30px auto;
+  /* border: 2px solid #000; */
+  padding: 20px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+/* Practice rows */
+.practice-row {
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  height: 70px;
+  margin-bottom: 15px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+
+.practice-row img {
+  width: auto;
+  max-width: 60px;
+  height: 46px;
+  object-fit: contain;
+  margin: 0 5px;
+  transform: translateY(4px);
+  align-self: center;
+}
+
+/* Hanging/descending Urdu letters: dal(د), ddal(ڈ), zal(ذ), ray(ر), rray(ڑ), zay(ز), zhay(ژ) */
+/* These letters start FROM the top solid line, tail hangs down — natural Urdu position */
+/* URL-encoded selectors (when browser encodes the src) */
+.practice-row img[src*="%D8%AF"],
+.practice-row img[src*="%DA%88"],
+.practice-row img[src*="%D8%B0"],
+.practice-row img[src*="%D8%B1"],
+.practice-row img[src*="%DA%91"],
+.practice-row img[src*="%D8%B2"],
+.practice-row img[src*="%DA%98"],
+/* Raw Unicode selectors (when Django serves with raw Unicode filenames) */
+.practice-row img[src*="د"],
+.practice-row img[src*="ڈ"],
+.practice-row img[src*="ذ"],
+.practice-row img[src*="ر"],
+.practice-row img[src*="ڑ"],
+.practice-row img[src*="ز"],
+.practice-row img[src*="ژ"] {
+  transform: translateY(0px);
+  align-self: flex-start;
+  margin-top: 0px;
+  object-fit: contain;
+  object-position: top;
+}
+
+/* Custom positioning for specific Urdu letters in practice row to sit them on their exact handwriting baselines */
+
+/* Alif / Alif-Madda */
+.practice-row img[src*="/ا.png"],
+.practice-row img[src*="%D8%A7.png"],
+.practice-row img[src*="/آ.png"],
+.practice-row img[src*="%D8%A2.png"] {
+  align-self: flex-start;
+  height: 42px !important;
+  width: auto;
+  transform: translateY(0px) !important;
+}
+
+/* Bay, Pay, Noon, Yeah, Yeah-barree (sit on Line 3) */
+.practice-row img[src*="/ب.png"],
+.practice-row img[src*="%D8%A8.png"],
+.practice-row img[src*="/پ.png"],
+.practice-row img[src*="%D9%BE.png"],
+.practice-row img[src*="/ن.png"],
+.practice-row img[src*="%D9%86.png"],
+.practice-row img[src*="/ی.png"],
+.practice-row img[src*="%DB%8C.png"],
+.practice-row img[src*="/ے.png"],
+.practice-row img[src*="%DB%92.png"] {
+  align-self: center;
+  height: 44px !important;
+  width: auto;
+  transform: translateY(4px) !important;
+}
+
+/* Wao, Hay, Hamza (sit on Line 2/3, translated and sized smaller) */
+.practice-row img[src*="/و.png"], .practice-row img[src*="%D9%88.png"],
+.practice-row img[src*="/ہ.png"], .practice-row img[src*="%DB%81.png"],
+.practice-row img[src*="/ء.png"], .practice-row img[src*="%D8%A1.png"] {
+  align-self: center;
+  height: 30px !important;
+  width: auto;
+  transform: translateY(-10px) !important;
+}
+
+/* Tay, Ttay, Say (sit on Line 3 with dots/symbols at top) */
+.practice-row img[src*="/ت.png"],
+.practice-row img[src*="%D8%AA.png"],
+.practice-row img[src*="/ٹ.png"],
+.practice-row img[src*="%D9%B9.png"],
+.practice-row img[src*="/ث.png"],
+.practice-row img[src*="%D8%AB.png"] {
+  align-self: center;
+  height: 52px !important;
+  width: auto;
+  transform: translateY(0px) !important;
+}
+
+/* Jeem, Chay, Hay, Khay (Top bar on Line 2, bottom touches Line 4) */
+.practice-row img[src*="/ج.png"],
+.practice-row img[src*="%D8%AC.png"],
+.practice-row img[src*="/چ.png"],
+.practice-row img[src*="%DA%86.png"] {
+  align-self: flex-start;
+  height: 52px !important;
+  width: auto;
+  transform: translateY(16px) !important;
+}
+
+.practice-row img[src*="/ح.png"],
+.practice-row img[src*="%D8%AD.png"] {
+  align-self: flex-start;
+  height: 48px !important;
+  width: auto;
+  transform: translateY(19px) !important;
+}
+
+.practice-row img[src*="/خ.png"],
+.practice-row img[src*="%D8%AE.png"] {
+  align-self: flex-start;
+  height: 52px !important;
+  width: auto;
+  transform: translateY(16px) !important;
+}
+
+/* Daal, Ddal, Zaal (Bottom touches Line 3) */
+.practice-row img[src*="/د.png"],
+.practice-row img[src*="%D8%AF.png"] {
+  align-self: flex-start;
+  height: 26px !important;
+  width: auto;
+  transform: translateY(16px) !important;
+}
+
+.practice-row img[src*="/ڈ.png"],
+.practice-row img[src*="%DA%88.png"],
+.practice-row img[src*="/ذ.png"],
+.practice-row img[src*="%D8%B0.png"] {
+  align-self: flex-start;
+  height: 32px !important;
+  width: auto;
+  transform: translateY(10px) !important;
+}
+
+/* Ray, Rray, Zay, Zhay (Bottom touches Line 3) */
+.practice-row img[src*="/ر.png"],
+.practice-row img[src*="%D8%B1.png"],
+.practice-row img[src*="/ڑ.png"],
+.practice-row img[src*="%DA%91.png"] {
+  align-self: flex-start;
+  height: 25px !important;
+  width: auto;
+  transform: translateY(17px) !important;
+}
+
+.practice-row img[src*="/ز.png"],
+.practice-row img[src*="%D8%B2.png"],
+.practice-row img[src*="/ژ.png"],
+.practice-row img[src*="%DA%98.png"] {
+  align-self: flex-start;
+  height: 32px !important;
+  width: auto;
+  transform: translateY(10px) !important;
+}
+
+/* Seen, Sheen, Suaad, Zuaad (Top sits on Line 2, bottom touches Line 4) */
+.practice-row img[src*="/س.png"],
+.practice-row img[src*="%D8%B3.png"],
+.practice-row img[src*="/ص.png"],
+.practice-row img[src*="%D8%B5.png"] {
+  align-self: flex-start;
+  height: 50px !important;
+  width: auto;
+  transform: translateY(19px) !important;
+}
+
+.practice-row img[src*="/ش.png"],
+.practice-row img[src*="%D8%B4.png"],
+.practice-row img[src*="/ض.png"],
+.practice-row img[src*="%D8%B6.png"] {
+  align-self: flex-start;
+  height: 54px !important;
+  width: auto;
+  transform: translateY(15px) !important;
+}
+
+/* Toay, Zoay (Top stick on Line 1, bottom sits on Line 3) */
+.practice-row img[src*="/ط.png"],
+.practice-row img[src*="%D8%B7.png"],
+.practice-row img[src*="/ظ.png"],
+.practice-row img[src*="%D8%B8.png"] {
+  align-self: flex-start;
+  height: 42px !important;
+  width: auto;
+  transform: translateY(0px) !important;
+}
+
+/* Ain, Ghain (Top head on Line 2, bottom touches Line 4) */
+.practice-row img[src*="/ع.png"],
+.practice-row img[src*="%D8%B9.png"] {
+  align-self: flex-start;
+  height: 50px !important;
+  width: auto;
+  transform: translateY(20px) !important;
+}
+
+.practice-row img[src*="/غ.png"],
+.practice-row img[src*="%D8%BA.png"] {
+  align-self: flex-start;
+  height: 54px !important;
+  width: auto;
+  transform: translateY(16px) !important;
+}
+
+/* Fay, Qaaf (Sit on Line 2/Line 3) */
+.practice-row img[src*="/ف.png"],
+.practice-row img[src*="%D9%81.png"] {
+  align-self: center;
+  height: 46px !important;
+  width: auto;
+  transform: translateY(-14px) !important;
+}
+
+.practice-row img[src*="/ق.png"],
+.practice-row img[src*="%D9%82.png"] {
+  align-self: center;
+  height: 48px !important;
+  width: auto;
+  transform: translateY(4px) !important;
+}
+
+/* Kaaf, Gaaf, Laam, Meem (Sit on Line 2) */
+.practice-row img[src*="/ک.png"],
+.practice-row img[src*="%DA%A9.png"],
+.practice-row img[src*="/ل.png"],
+.practice-row img[src*="%D9%84.png"],
+.practice-row img[src*="/م.png"],
+.practice-row img[src*="%D9%85.png"] {
+  align-self: center;
+  height: 38px !important;
+  width: auto;
+  transform: translateY(-14px) !important;
+}
+
+.practice-row img[src*="/گ.png"],
+.practice-row img[src*="%DA%AF.png"] {
+  align-self: center;
+  height: 44px !important;
+  width: auto;
+  transform: translateY(-14px) !important;
+}
+
+
+
+.practice-row::before,
+.practice-row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px dashed #000;
+}
+
+.practice-row::before {
+  top: 27.7%;
+}
+
+.practice-row::after {
+  top: 60%;
+}
+
+/* Question header */
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-bottom: 3px solid #dfe2e4;
+  background: linear-gradient(to right, #cfd5d8, hsl(0, 0%, 100%), hsl(202, 14%, 89%));
+  border-radius: 6px 6px 0 0;
+  font-family: 'Playfair Display', serif;
+}
+
+.question-header span.marks {
+  /* background: #afb4b8; */
+  /* color: #fff; */
+  font-size: 25px;
+  font-weight: bold;
+  /* padding: 4px 10px; */
+  /* border-radius: 20px; */
+  /* min-width: 50px; */
+  text-align: center;
+  /* box-shadow: 0px 2px 6px rgba(0,0,0,0.2); */
+}
+
+.question-header::before {
+  /* content: "✦ "; */
+  /* color: #007bff; */
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 6px;
+}
+
+.marks {
+  font-weight: bold;
+}
+
+/* Matching */
+.matching-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 0;
+  gap: 20px;
+}
+
+.matching-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+}
+
+.matching-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.matching-col p {
+  font-size: 32px;
+  font-weight: bold;
+  padding: 6px 15px;
+  border: 1px solid #333;
+  border-radius: 50%;
+  background: #f9f9f9;
+  min-width: 90px;
+  text-align: center;
+  margin: 0 !important;
+}
+
+.matching-col img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 6px;
+  padding: 4px;
+  margin: 0 !important;
+}
+
+/* General Dot Style */
+.matching-item .dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #000;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* LTR Dot Positioning (English Paper) */
+.matching-col:first-child .matching-item .dot {
+  right: -20px;
+}
+.matching-col:last-child .matching-item .dot {
+  left: -20px;
+}
+
+/* RTL Dot Positioning (Urdu Paper) */
+[dir="rtl"] .matching-col:first-child .matching-item .dot {
+  left: -20px;
+  right: auto;
+}
+[dir="rtl"] .matching-col:last-child .matching-item .dot {
+  right: -20px;
+  left: auto;
+}
+
+/* 
+.question-block {
+  border: 2px solid #444;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 8px;
+  background: #fdfdfd;
+} */
+
+
+.question-box {
+  border: 2px solid #000;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin: 5px 0;
+  background: #fff;
+}
+
+.question-block {
+  margin: 5px 0;
+  padding: 8px;
+}
+
+.question-heading {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.worksheet-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  /* Reduced from 25px */
+}
+
+.worksheet-item {
+  width: 45%;
+  text-align: center;
+}
+
+.worksheet-item img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 15px auto;
+}
+
+.lines {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* center align lines */
+}
+
+.line {
+  width: 200px;
+  /* sirf ek letter ke liye jagah */
+  height: 10px;
+  border-bottom: 1px solid #000;
+  margin: 2px 0;
+}
+
+
+
+/* PDF aur Print ke liye rules */
+/* ========================= */
+/* PRINT STYLES */
+/* ========================= */
+
+@media print {
+
+  /* Body adjustments for printing */
+  body {
+    margin: 0;
+    padding: 0 !important;
+    border: none;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .a4-paper {
+    margin: 0 !important;
+    padding: 20px !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide ALL unnecessary elements during print */
+  .edit-btn,
+  .save-btn,
+  .add-btn,
+  #openFormBtn,
+  #editBtn,
+  #saveBtn,
+  .title-input,
+  button {
+    display: none !important;
+  }
+
+  /* Center align paper title for print */
+  .paper-title {
+    text-align: center;
+    display: block !important;
+    justify-content: center;
+  }
+
+  /* Remove any flex display that might cause centering issues */
+  .paper-title {
+    display: block !important;
+  }
+
+  /* Page break control for question blocks */
+  .question-block {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 25px;
+    padding: 10px;
+  }
+
+  /* Ensure question headers stay with their content */
+  .question-header {
+    page-break-after: avoid;
+    break-after: avoid;
+    margin-bottom: 10px;
+  }
+
+  /* Keep matching columns together */
+  .matching-wrapper {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Keep practice rows intact */
+  .practice-row {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Keep images with their content */
+  img {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    max-height: 100px;
+  }
+
+  /* Table printing improvements */
+  .question-table {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    width: 100% !important;
+  }
+
+  /* Adjust spacing for print */
+  .worksheet {
+    margin: 10px 0;
+    padding: 10px;
+
+    width: 100% !important;
+  }
+
+  /* Ensure proper margins on each page */
+  @page {
+    margin: 0.5cm !important;
+    /* Reduce page margins */
+    size: A4;
+  }
+
+  /* Main container width control */
+  .paper,
+  .worksheet,
+  .top-section,
+  .info-section {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    box-sizing: border-box;
+  }
+
+  /* Avoid page breaks right after headings */
+  h1,
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+
+  /* Keep info section together */
+  .info-section {
+    page-break-inside: avoid;
+    width: 100% !important;
+  }
+
+  /* Top section printing */
+  .top-section {
+    page-break-inside: avoid;
+    margin-bottom: 15px;
+    width: 100% !important;
+    padding: 10px !important;
+  }
+
+  /* Force all elements to take full width */
+  * {
+    box-sizing: border-box;
+    max-width: 100% !important;
+  }
+}
+
+/* Additional screen-only styles */
+@media screen {
+
+  .edit-btn,
+  .save-btn,
+  .add-btn {
+    display: inline-block;
+  }
+
+  /* Center align add button on screen */
+  .add-btn {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+  }
+}
+
+
+.question-block {
+  margin: 10px auto;
+  /* Reduced from 40px auto to remove extra space between questions */
+  width: 80%;
+  text-align: center;
+  border: 3px solid #000;
+  padding: 30px;
+  background: #fff;
+  border-radius: 20px;
+}
+
+.question-header {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.marks {
+  font-size: 18px;
+  color: #333;
+}
+
+
+.download-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.download-btn:hover {
+  background-color: #0056b3;
+}
+
+.circle-grid {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 50px;
+  margin-top: 25px;
+  justify-content: center;
+}
+
+.circle-grid div {
+  width: 25%;
+  height: 60px;
+  font-size: 40px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Urdu options styling */
+.urdu-options {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.urdu-options span {
+  font-size: 32px;
+  font-weight: bold;
+  padding: 5px 15px;
+  text-align: center;
+}
+
+/* Urdu Circle Letter Section */
+.circle-section {
+  display: flex;
+  direction: ltr;
+  align-items: flex-start;
+  gap: 15px;
+  margin: 10px auto;
+  width: 100%;
+}
+
+.circle-grid-urdu {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 2px solid #000;
+  width: 100%;
+  flex: 1;
+}
+
+.circle-cell {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 5px;
+  border: 1px solid #bbb;
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+}
+
+.target-letter-box {
+  width: 70px;
+  height: 70px;
+  min-width: 70px;
+  border: 3px solid #000;
+  background: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(45deg);
+  margin: 20px 15px 0 15px;
+  flex-shrink: 0;
+}
+
+.target-letter-box span {
+  font-size: 38px;
+  font-weight: bold;
+  transform: rotate(-45deg);
+}
+
+/* Math Worksheet Styles (Matching user's images exactly) */
+.math-worksheet {
+  width: 100%;
+  margin: 15px auto;
+  padding: 0;
+  background: #fff;
+}
+
+.math-q-wrapper {
+  margin-bottom: 40px;
+  background: #fff;
+  padding: 10px 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.math-q-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  border-bottom: none;
+  background: none;
+  padding: 5px 0;
+  margin-bottom: 25px;
+}
+
+.math-q-title {
+  color: #000;
+}
+
+.math-q-marks {
+  color: #000;
+  font-size: 20px;
+}
+
+/* Q1: Circle correct number */
+.math-circle-grid-exact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 50px;
+  column-gap: 30px;
+  margin-top: 15px;
+}
+
+.math-circle-card-exact {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  min-height: 130px !important;
+}
+
+.math-circle-images-exact {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 4px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 75px !important;
+  width: 100% !important;
+}
+
+.math-circle-images-exact img {
+  width: 38px !important;
+  height: 38px !important;
+  object-fit: contain !important;
+  filter: brightness(0.5) contrast(2) !important;
+  flex-shrink: 1 !important;
+  min-width: 0 !important;
+}
+
+.math-circle-options-exact {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 35px !important;
+  margin-top: 10px !important;
+  width: 100% !important;
+}
+
+.math-circle-options-exact span {
+  font-size: 34px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  cursor: pointer !important;
+  padding: 0 10px !important;
+}
+
+/* Q2: Count and Match */
+.math-match-layout-exact {
+  display: flex !important;
+  justify-content: space-between !important;
+  margin-top: 15px !important;
+  width: 90% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.math-match-left-col-exact {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 30px !important;
+  align-items: flex-start !important;
+  width: 70% !important;
+}
+
+.math-match-right-col-exact {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 30px !important;
+  align-items: flex-end !important;
+  justify-content: space-around !important;
+  width: 20% !important;
+  padding-right: 20px !important;
+}
+
+.math-match-item-row-exact {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 60px !important;
+}
+
+.math-match-images-exact {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 4px !important;
+  align-items: center !important;
+}
+
+.math-match-images-exact img {
+  width: 38px !important;
+  height: 38px !important;
+  object-fit: contain !important;
+  filter: brightness(0.5) contrast(2) !important;
+  flex-shrink: 1 !important;
+  min-width: 0 !important;
+}
+
+.math-match-num-row-exact {
+  min-height: 60px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.math-match-num-row-exact span {
+  font-size: 32px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+}
+
+/* Q3: Tick the N items */
+.math-tick-container-exact {
+  width: 100% !important;
+  margin-top: 20px !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.math-tick-images-exact {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 25px !important;
+  justify-content: center !important;
+  max-width: 85% !important;
+}
+
+.math-tick-images-exact img {
+  width: 120px !important;
+  height: 120px !important;
+  object-fit: contain !important;
+  filter: brightness(0.5) contrast(2) !important;
+}
+
+/* Q4: Match the same number */
+.math-num-match-layout-exact {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.math-num-match-left-exact,
+.math-num-match-right-exact {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+.math-num-match-row-exact {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.math-num-match-row-exact span {
+  font-size: 32px;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Printing adjustments for Math elements */
+@media print {
+  .math-q-wrapper {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 30px;
+  }
+
+  .math-circle-card-exact {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .math-match-item-row-exact,
+  .math-match-num-row-exact {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+/* Math Matching Items and Dots */
+.math-matching-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.math-matching-item .dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #000;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Math Count and Match */
+.math-match-left-col-exact .math-matching-item .dot {
+  right: -25px;
+}
+.math-match-right-col-exact .math-matching-item .dot {
+  left: -25px;
+}
+
+/* Math Match Same Number */
+.math-num-match-left-exact .math-matching-item .dot {
+  right: -25px;
+}
+.math-num-match-right-exact .math-matching-item .dot {
+  left: -25px;
+}

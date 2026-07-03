@@ -1,0 +1,109 @@
+/* General Page Style */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #1d2b64, #f8cdda);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Login Box */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.login-box {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  padding: 40px 50px;
+  width: 360px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.login-box:hover {
+  transform: translateY(-5px);
+}
+
+/* Headings */
+.login-box h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+/* Input Fields */
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  font-size: 14px;
+  color: #444;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #1d2b64;
+  outline: none;
+  box-shadow: 0 0 5px rgba(29, 43, 100, 0.3);
+}
+
+/* Login Button */
+.login-btn {
+  width: 100%;
+  background: #1d2b64;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #15204b;
+}
+
+/* Signup Text */
+.signup-text {
+  font-size: 14px;
+  color: #555;
+  margin-top: 20px;
+}
+
+.signup-text a {
+  color: #1d2b64;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}

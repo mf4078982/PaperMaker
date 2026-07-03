@@ -1,0 +1,184 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar main container */
+.navbar {
+  background: #13283e; /* light background */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Left side of navbar (logo + menu) */
+.navbar .left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Logo style */
+.navbar .logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+/* Menu container */
+.navbar .menu {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* gap between each link */
+}
+
+/* Links inside menu */
+.navbar .menu a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: hsl(204, 30%, 45%);
+  padding: 6px 8px;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+/* Links hover effect */
+.navbar .menu a:hover {
+  background: hsl(204, 51%, 67%);
+  border-radius: 6px;
+  color: hsl(204, 30%, 30%);
+}
+
+/* Icon inside links */
+.navbar .menu img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Page Content */
+.container {
+  padding: 20px;
+}
+ .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 25px;
+      background: #2d3e50;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      flex-wrap: wrap;
+    }
+
+    .navbar .left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .navbar .logo {
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .navbar .menu {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .navbar .menu a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .navbar .menu a:hover {
+      background: #fff;
+      color: #000;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #afccd3;
+      color: rgb(90, 124, 158);
+    }
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown button style (Add Subject link) */
+.dropdown .dropbtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: hsl(204,30%,45%);
+  padding: 6px 8px;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for main link */
+.dropdown .dropbtn:hover {
+  background: hsl(204,30%,90%);
+  border-radius: 6px;
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #161111;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside dropdown */
+.dropdown-content a {
+  color: hsl(204,30%,45%);
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+/* Hover effect inside dropdown */
+.dropdown-content a:hover {
+  background-color: hsl(204,30%,90%);
+}
+
+ 
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;   /* پہلے display:none تھا */
+  position: absolute;
+  background-color: #161111;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
