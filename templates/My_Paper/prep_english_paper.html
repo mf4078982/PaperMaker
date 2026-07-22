@@ -1,0 +1,643 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Prep English Paper Generator</title>
+  <link rel="stylesheet" href="{% static 'Paper_css/style.css' %}?v=8">
+  <style>
+    /* Custom style definitions for Prep Class English questions */
+    
+    /* Prep Use of This Layout */
+    .prep-use-this-container {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      margin-top: 15px;
+      margin-bottom: 25px;
+      padding: 0 10px;
+    }
+    .prep-use-this-block {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+    }
+    .prep-four-lines-box {
+      position: relative;
+      height: 36px;
+      width: 100%;
+    }
+    .prep-urdu-sentence {
+      width: 100%;
+      font-size: 22px;
+      font-family: "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", sans-serif;
+      text-align: right;
+      direction: rtl;
+      font-weight: bold;
+      padding-right: 10px;
+    }
+
+    /* Prep Vowels Layout */
+    .prep-vowels-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      margin-bottom: 25px;
+      border: none;
+      padding: 15px;
+      min-height: 280px;
+    }
+    .prep-vowels-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 55%;
+    }
+    .prep-vowels-subtitle {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 0 10px 0;
+    }
+    .prep-vowel-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    .prep-vowel-letter {
+      font-size: 20px;
+      font-weight: bold;
+      width: 20px;
+      text-align: center;
+    }
+    .prep-vowel-four-lines {
+      position: relative;
+      height: 36px;
+      flex-grow: 1;
+    }
+    .prep-vowels-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40%;
+    }
+    .prep-vowels-hand {
+      max-width: 100%;
+      max-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .prep-vowels-hand img {
+      max-width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+    }
+
+    /* Prep Fruits Layout */
+    .prep-fruits-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      margin-bottom: 25px;
+      border: none;
+      padding: 15px;
+      min-height: 380px;
+    }
+    .prep-fruits-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 55%;
+    }
+    .prep-fruit-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 15px;
+      width: 100%;
+    }
+    .prep-fruit-four-lines {
+      position: relative;
+      height: 36px;
+      flex-grow: 1;
+    }
+    .prep-fruit-image {
+      width: 70px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .prep-fruit-image img {
+      max-width: 65px;
+      max-height: 55px;
+      object-fit: contain;
+    }
+    .prep-fruits-right {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      width: 40%;
+    }
+    .prep-fruit-large-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      gap: 10px;
+    }
+    .prep-fruit-large-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 240px;
+    }
+    .prep-fruit-large-image img {
+      max-width: 180px;
+      max-height: 230px;
+      object-fit: contain;
+    }
+    .prep-fruit-large-four-lines {
+      position: relative;
+      height: 36px;
+      width: 100%;
+    }
+    .prep-body-parts-container {
+      border: none !important;
+    }
+
+    /* ── Write the Picture Name ── */
+    .prep-pic-name-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 30px;
+      margin: 15px 10px 20px;
+    }
+    .prep-pic-name-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .prep-pic-name-cell img {
+      width: 120px;
+      height: 110px;
+      object-fit: contain;
+    }
+    .prep-pic-name-lines {
+      position: relative;
+      height: 36px;
+      width: 100%;
+    }
+
+    /* ── Write the Missing Words ── */
+    .prep-missing-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin: 15px auto 20px auto;
+      width: 70%;
+    }
+    .prep-missing-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .prep-missing-word {
+      font-size: 24px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      letter-spacing: 2px;
+      padding: 4px 0;
+    }
+    .prep-missing-img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+    }
+
+    /* ── Write Capital & Small Letter ── */
+    .prep-capital-small-container {
+      margin: 15px 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .prep-letter-writing-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Paper Content Wrapper -->
+  <div id="paper-content" class="a4-paper">
+    <!-- Top Section -->
+    <div class="top-section">
+      <div class="logo-box">
+        <img src="{% static 'images/logo/images.png' %}" alt="Logo">
+      </div>
+      <div class="school-name">
+        <h1>RAEES GRAMMAR HIGH SCHOOL</h1>
+        <p>Kot Ali Garh Kasur - 0321-5252617</p>
+      </div>
+      <div class="marks-box">
+        <p><b>Total Marks:</b> ______</p>
+        <p><b>Obtained:</b> ______</p>
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <div class="info-line"><span class="info-label">Name:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Class:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Date:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Roll No:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Teacher Sign:</span> <span class="underline"></span></div>
+    </div>
+
+    <table class="question-table">
+      <tr>
+        <th>Question No</th>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <th>Obtained Marks</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <!-- Paper Title -->
+    <div class="paper-title">
+      <span id="paperTitle">Paper {{subject}} Class {{class_name}} {{exam}} {{year}}</span>
+      <button class="edit-btn" id="editBtn">✏️</button>
+      <input type="text" id="titleInput" class="title-input">
+      <button class="save-btn" id="saveBtn">Save</button>
+    </div>
+
+    <div class="my_line"></div>
+
+    <!-- Popup Form -->
+    <div id="formPopup" class="form-popup">
+      <div class="form-content">
+        <span id="closeFormBtn" class="close-btn">&times;</span>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" id="generateBtn" class="submit-btn">Generate Worksheet</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Worksheet Blocks -->
+    <div class="worksheet" id="worksheet">
+
+      {% for question in all_questions %}
+
+      <!-- CASE 1: Write parts of body name -->
+      {% if question.heading == "prep_write_body_parts" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the name of parts of body. (Any five).
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="body-parts-container prep-body-parts-container">
+          <div class="body-parts-left">
+            {% for item in question.body_parts %}
+              {% if item.name != 'Hand' %}
+              <div class="body-part-row">
+                <div class="body-part-image">
+                  <img src="{% static item.image %}?v=2" alt="{{ item.name }}">
+                </div>
+                <div class="body-part-box">
+                  <div class="body-part-box-line-1"></div>
+                  <div class="body-part-box-line-2"></div>
+                  <div class="body-part-box-line-3"></div>
+                  <div class="body-part-box-line-4"></div>
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="body-parts-right">
+            {% for item in question.body_parts %}
+              {% if item.name == 'Hand' %}
+              <div class="body-part-hand-container">
+                <div class="body-part-hand-image">
+                  <img src="{% static item.image %}?v=2" alt="{{ item.name }}">
+                </div>
+                <div class="body-part-hand-boxes">
+                  <div class="body-part-box-double">
+                    <div class="body-part-box-line-1"></div>
+                    <div class="body-part-box-line-2"></div>
+                    <div class="body-part-box-line-3"></div>
+                    <div class="body-part-box-line-4"></div>
+                  </div>
+                  <div class="body-part-box-double">
+                    <div class="body-part-box-line-1"></div>
+                    <div class="body-part-box-line-2"></div>
+                    <div class="body-part-box-line-3"></div>
+                    <div class="body-part-box-line-4"></div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 2: Use of This -->
+      {% if question.heading == "prep_use_of_this" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Use of "this".
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-use-this-container">
+          {% for sentence in question.sentences %}
+          <div class="prep-use-this-block">
+            <div class="prep-urdu-sentence">
+              {{ sentence }}
+            </div>
+            <div class="prep-four-lines-box">
+              <div class="nursery-line-1"></div>
+              <div class="nursery-line-2"></div>
+              <div class="nursery-line-3"></div>
+              <div class="nursery-line-4"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 3: Vowels -->
+      {% if question.heading == "prep_vowels" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Vowels.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-vowels-container">
+          <div class="prep-vowels-left">
+            <p class="prep-vowels-subtitle">Vowels in the middle.</p>
+            {% for vowel in question.vowels_list %}
+            <div class="prep-vowel-row">
+              <span class="prep-vowel-letter">{{ vowel }}</span>
+              <div class="prep-vowel-four-lines">
+                <div class="nursery-line-1"></div>
+                <div class="nursery-line-2"></div>
+                <div class="nursery-line-3"></div>
+                <div class="nursery-line-4"></div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="prep-vowels-right">
+            <div class="prep-vowels-hand">
+              <img src="{% static question.vowels_hand %}" alt="Vowels Hand">
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 4: Write the fruit name -->
+      {% if question.heading == "prep_write_fruit_name" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the fruit name. (Any five).
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-fruits-container">
+          <div class="prep-fruits-left">
+            {% for fruit in question.fruits_left %}
+            <div class="prep-fruit-row">
+              <div class="prep-fruit-image">
+                <img src="{% static fruit.image %}" alt="{{ fruit.name }}">
+              </div>
+              <div class="prep-fruit-four-lines">
+                <div class="nursery-line-1"></div>
+                <div class="nursery-line-2"></div>
+                <div class="nursery-line-3"></div>
+                <div class="nursery-line-4"></div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="prep-fruits-right">
+            <div class="prep-fruit-large-container">
+              <div class="prep-fruit-large-image">
+                <img src="{% static question.fruit_right.image %}" alt="{{ question.fruit_right.name }}">
+              </div>
+              <div class="prep-fruit-large-four-lines">
+                <div class="nursery-line-1"></div>
+                <div class="nursery-line-2"></div>
+                <div class="nursery-line-3"></div>
+                <div class="nursery-line-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 5: Write the picture name -->
+      {% if question.heading == "prep_write_picture_name" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the picture name.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-pic-name-grid">
+          {% for item in question.pic_items %}
+          <div class="prep-pic-name-cell">
+            <img src="{% static item.image %}" alt="{{ item.name }}">
+            <div class="prep-pic-name-lines">
+              <div class="nursery-line-1"></div>
+              <div class="nursery-line-2"></div>
+              <div class="nursery-line-3"></div>
+              <div class="nursery-line-4"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 6: Write the missing words -->
+      {% if question.heading == "prep_write_missing_words" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the missing words.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-missing-container">
+          {% for item in question.missing_words %}
+          <div class="prep-missing-row">
+            <div class="prep-missing-word">{{ item.word }}</div>
+            <img class="prep-missing-img" src="{% static item.image %}" alt="{{ item.word }}">
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 7: Write Capital & small letter Aa to Zz -->
+      {% if question.heading == "prep_write_capital_small" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the Capital &amp; small letter &ldquo;{{ question.range_label }}&rdquo;.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-capital-small-container">
+          {% for row in question.letter_rows %}
+          <div class="nursery-four-lines-row">
+            <div class="nursery-line-1"></div>
+            <div class="nursery-line-2"></div>
+            <div class="nursery-line-3"></div>
+            <div class="nursery-line-4"></div>
+            <div class="nursery-dots-container" style="justify-content: flex-start;">
+              {% for pos in row.dots %}
+              <span class="nursery-dot-guide" style="position: absolute; left: {{ pos }}%; transform: translateX(-50%);"></span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div
+    style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;"
+    class="action-buttons">
+    <button type="button" id="openFormBtn" class="add-btn" style="margin: 0;">+ Add Question</button>
+
+    <button type="button" onclick="generatePDF()" class="download-btn"
+      style="margin: 0; padding: 10px 20px; font-size: 16px; text-decoration: none; color: inherit; display: inline-block;">🖨️ Download PDF</button>
+
+    <form method="post" action="{% url 'reset_prep_english' %}" style="margin: 0;">
+      {% csrf_token %}
+      <button type="submit" class="reset-btn" style="margin: 0;">Reset All</button>
+    </form>
+  </div>
+
+  <!-- JS Files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function generatePDF() {
+      const element = document.getElementById('paper-content');
+
+      const origBorder = element.style.border;
+      const origShadow = element.style.boxShadow;
+      element.style.border = 'none';
+      element.style.boxShadow = 'none';
+      document.body.style.background = '#fff';
+
+      const opt = {
+        margin: [5, 5, 5, 5],
+        filename: 'prep_english_paper.pdf',
+        image: { type: 'jpeg', quality: 1.0 },
+        pagebreak: {
+          mode: ['css', 'legacy']
+        },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          letterRendering: true,
+          scrollX: 0,
+          scrollY: 0
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf()
+        .set(opt)
+        .from(element)
+        .save()
+        .then(() => {
+          element.style.border = origBorder;
+          element.style.boxShadow = origShadow;
+          document.body.style.background = '#e0e0e0';
+        });
+    }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const headingSelect = document.getElementById("id_heading");
+      
+      const sentenceFields = [
+        document.getElementById("id_sentence_1"),
+        document.getElementById("id_sentence_2"),
+        document.getElementById("id_sentence_3"),
+        document.getElementById("id_sentence_4"),
+        document.getElementById("id_sentence_5")
+      ].filter(Boolean);
+
+      const letterFields = [
+        document.getElementById("id_start_letter"),
+        document.getElementById("id_end_letter")
+      ].filter(Boolean);
+
+      function updateFields() {
+        const value = headingSelect.value;
+        
+        sentenceFields.forEach(field => {
+          const parent = field.closest("p") || field.parentElement;
+          if (parent) {
+            parent.style.display = (value === "prep_use_of_this") ? "" : "none";
+          }
+        });
+
+        letterFields.forEach(field => {
+          const parent = field.closest("p") || field.parentElement;
+          if (parent) {
+            parent.style.display = (value === "prep_write_capital_small") ? "" : "none";
+          }
+        });
+      }
+
+      if (headingSelect) {
+        headingSelect.addEventListener("change", updateFields);
+        updateFields();
+      }
+    });
+  </script>
+  <script src="{% static 'Paper_js/paper_tamp1.js' %}"></script>
+  <script src="{% static 'Paper_js/paper_tamp.js' %}"></script>
+  <script src="{% static 'Paper_js/reset.js' %}"></script>
+</body>
+
+</html>

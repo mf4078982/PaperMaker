@@ -1,0 +1,396 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Nursery Paper Generator</title>
+  <link rel="stylesheet" href="{% static 'Paper_css/style.css' %}?v=8">
+</head>
+
+<body>
+  <!-- Paper Content Wrapper -->
+  <div id="paper-content" class="a4-paper">
+    <!-- Top Section -->
+    <div class="top-section">
+      <div class="logo-box">
+        <img src="{% static 'images/logo/images.png' %}" alt="Logo">
+      </div>
+      <div class="school-name">
+        <h1>RAEES GRAMMAR HIGH SCHOOL</h1>
+        <p>Kot Ali Garh Kasur - 0321-5252617</p>
+      </div>
+      <div class="marks-box">
+        <p><b>Total Marks:</b> ______</p>
+        <p><b>Obtained:</b> ______</p>
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <div class="info-line"><span class="info-label">Name:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Class:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Date:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Roll No:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Teacher Sign:</span> <span class="underline"></span></div>
+    </div>
+
+    <table class="question-table">
+      <tr>
+        <th>Question No</th>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <th>Obtained Marks</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <!-- Paper Title -->
+    <div class="paper-title">
+      <span id="paperTitle">Paper {{subject}} Class {{class_name}} {{exam}} {{year}}</span>
+      <button class="edit-btn" id="editBtn">✏️</button>
+      <input type="text" id="titleInput" class="title-input">
+      <button class="save-btn" id="saveBtn">Save</button>
+    </div>
+
+    <div class="my_line"></div>
+
+    <!-- Popup Form -->
+    <div id="formPopup" class="form-popup">
+      <div class="form-content">
+        <span id="closeFormBtn" class="close-btn">&times;</span>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" id="generateBtn" class="submit-btn">Generate Worksheet</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Worksheet Blocks -->
+    <div class="worksheet" id="worksheet">
+
+      {% for question in all_questions %}
+
+      <!-- CASE 1: Write Alphabet Capital & Small -->
+      {% if question.heading == "write_capital_small" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the Capital and Small letter "{{ question.start_alphabet|upper }}{{ question.start_alphabet|lower }} to {{ question.end_alphabet|upper }}{{ question.end_alphabet|lower }}".
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        
+        <div class="nursery-four-lines-container">
+          {% for r in question.num_rows %}
+          <div class="nursery-four-lines-row">
+            <div class="nursery-line-1"></div>
+            <div class="nursery-line-2"></div>
+            <div class="nursery-line-3"></div>
+            <div class="nursery-line-4"></div>
+            <div class="nursery-dots-container">
+              <span class="nursery-dot-guide"></span>
+              <span class="nursery-dot-guide"></span>
+              <span class="nursery-dot-guide"></span>
+              <span class="nursery-dot-guide"></span>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 2: Write Missing Capital Letters -->
+      {% if question.heading == "missing_capital" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the missing capital letters.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        
+        <div class="missing-letters-vertical-container">
+          {% for item in question.missing_items %}
+          <div class="missing-letter-item">
+            <span class="missing-letter-prompt">{{ item.prompt_capital }}{{ item.prompt_small }}</span>
+            <div class="missing-letter-box">
+              <div class="missing-box-line-1"></div>
+              <div class="missing-box-line-2"></div>
+              <div class="missing-box-line-3"></div>
+              <div class="missing-box-line-4"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 3: Match Picture with Letter -->
+      {% if question.heading == "match_picture_letter" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Match the picture with the letter.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        
+        <div class="nursery-matching-wrapper">
+          <div class="nursery-matching-col nursery-letters-col">
+            {% for letter in question.left_letters %}
+            <div class="nursery-matching-letter">
+              {{ letter }}
+            </div>
+            {% endfor %}
+          </div>
+          <div class="nursery-matching-col nursery-images-col">
+            {% for item in question.worksheet_items %}
+            <div class="nursery-matching-image">
+              <img src="{% static item.image %}" alt="{{ item.letter }}">
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 4: Match the Same Letter -->
+      {% if question.heading == "match_same_letter" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Match the same letter.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        
+        <div class="nursery-matching-wrapper">
+          <div class="nursery-matching-col nursery-letters-col">
+            {% for letter in question.left_letters %}
+            <div class="nursery-matching-letter">
+              {{ letter }}
+            </div>
+            {% endfor %}
+          </div>
+          <div class="nursery-matching-col nursery-letters-col">
+            {% for letter in question.right_letters %}
+            <div class="nursery-matching-letter">
+              {{ letter }}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 5: What Comes Between -->
+      {% if question.heading == "what_comes_between" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. What comes between.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        
+        <div class="between-container">
+          {% for item in question.between_items %}
+          <div class="between-row">
+            <span class="between-letter">{{ item.first }}</span>
+            <div class="between-box">
+              <div class="between-box-line-1"></div>
+              <div class="between-box-line-2"></div>
+              <div class="between-box-line-3"></div>
+              <div class="between-box-line-4"></div>
+            </div>
+            <span class="between-letter">{{ item.last }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 6: Draw a Circle Around the Right Letter -->
+      {% if question.heading == "circle_right_letter" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Draw a circle around the right letter.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        
+        <div class="circle-right-container">
+          {% for item in question.circle_items %}
+          {% if forloop.counter0|divisibleby:2 %}<div class="circle-right-row">{% endif %}
+            <div class="circle-right-item">
+              <div class="circle-right-image">
+                <img src="{% static item.image %}" alt="{{ item.letter }}">
+              </div>
+              <div class="circle-right-options">
+                <span class="circle-right-option">{{ item.option1 }}</span>
+                <span class="circle-right-or">or</span>
+                <span class="circle-right-option">{{ item.option2 }}</span>
+              </div>
+            </div>
+          {% if forloop.counter|divisibleby:2 or forloop.last %}</div>{% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 7: Write the first letter of each picture -->
+      {% if question.heading == "nursery_write_first_letter" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the first letter of each picture.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="nursery-first-letter-container">
+          {% for item in question.worksheet_items %}
+          {% if forloop.counter0|divisibleby:2 %}<div class="nursery-first-letter-row">{% endif %}
+            <div class="nursery-first-letter-item">
+              <div class="nursery-first-letter-image">
+                <img src="{% static item.image %}" alt="{{ item.letter }}">
+              </div>
+              <div class="nursery-first-letter-box">
+                <div class="nursery-first-letter-line-1"></div>
+                <div class="nursery-first-letter-line-2"></div>
+                <div class="nursery-first-letter-line-3"></div>
+                <div class="nursery-first-letter-line-4"></div>
+              </div>
+            </div>
+          {% if forloop.counter|divisibleby:2 or forloop.last %}</div>{% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 8: Write the parts of body name -->
+      {% if question.heading == "nursery_write_body_parts" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the parts of body name.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="body-parts-container">
+          <div class="body-parts-left">
+            {% for item in question.body_parts %}
+              {% if item.name != 'Hand' %}
+              <div class="body-part-row">
+                <div class="body-part-image">
+                  <img src="{% static item.image %}?v=2" alt="{{ item.name }}">
+                </div>
+                <div class="body-part-box">
+                  <div class="body-part-box-line-1"></div>
+                  <div class="body-part-box-line-2"></div>
+                  <div class="body-part-box-line-3"></div>
+                  <div class="body-part-box-line-4"></div>
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="body-parts-right">
+            {% for item in question.body_parts %}
+              {% if item.name == 'Hand' %}
+              <div class="body-part-hand-container">
+                <div class="body-part-hand-image">
+                  <img src="{% static item.image %}?v=2" alt="{{ item.name }}">
+                </div>
+                <div class="body-part-hand-boxes">
+                  <div class="body-part-box-double">
+                    <div class="body-part-box-line-1"></div>
+                    <div class="body-part-box-line-2"></div>
+                    <div class="body-part-box-line-3"></div>
+                    <div class="body-part-box-line-4"></div>
+                  </div>
+                  <div class="body-part-box-double">
+                    <div class="body-part-box-line-1"></div>
+                    <div class="body-part-box-line-2"></div>
+                    <div class="body-part-box-line-3"></div>
+                    <div class="body-part-box-line-4"></div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div
+    style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;"
+    class="action-buttons">
+    <button type="button" id="openFormBtn" class="add-btn" style="margin: 0;">+ Add Question</button>
+
+    <button type="button" onclick="generatePDF()" class="download-btn"
+      style="margin: 0; padding: 10px 20px; font-size: 16px; text-decoration: none; color: inherit; display: inline-block;">🖨️ Download PDF</button>
+
+    <form method="post" action="{% url 'reset_nursery_english' %}" style="margin: 0;">
+      {% csrf_token %}
+      <button type="submit" class="reset-btn" style="margin: 0;">Reset All</button>
+    </form>
+  </div>
+
+  <!-- JS Files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function generatePDF() {
+      const element = document.getElementById('paper-content');
+
+      const origBorder = element.style.border;
+      const origShadow = element.style.boxShadow;
+      element.style.border = 'none';
+      element.style.boxShadow = 'none';
+      document.body.style.background = '#fff';
+
+      const opt = {
+        margin: [5, 5, 5, 5],
+        filename: 'nursery_english_paper.pdf',
+        image: { type: 'jpeg', quality: 1.0 },
+        pagebreak: {
+          mode: ['css', 'legacy']
+        },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          letterRendering: true,
+          scrollX: 0,
+          scrollY: 0
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf()
+        .set(opt)
+        .from(element)
+        .save()
+        .then(() => {
+          element.style.border = origBorder;
+          element.style.boxShadow = origShadow;
+          document.body.style.background = '#e0e0e0';
+        });
+    }
+  </script>
+  <script src="{% static 'Paper_js/paper_tamp1.js' %}"></script>
+  <script src="{% static 'Paper_js/paper_tamp.js' %}"></script>
+  <script src="{% static 'Paper_js/reset.js' %}"></script>
+</body>
+
+</html>

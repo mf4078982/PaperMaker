@@ -1,0 +1,651 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Prep Math Paper Generator</title>
+  <link rel="stylesheet" href="{% static 'Paper_css/style.css' %}?v=8">
+  <style>
+    /* Custom styles for Prep Math */
+    
+    /* Q1: Counting Grid */
+    .prep-math-counting-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 8px;
+      margin: 20px auto;
+      width: 95%;
+    }
+    .prep-math-counting-box {
+      aspect-ratio: 1;
+      border: 3px solid #000;
+      background-color: transparent;
+    }
+
+    /* Q2: English and Urdu Counting */
+    .prep-math-eu-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin: 20px auto;
+      width: 90%;
+    }
+    .prep-math-eu-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .prep-math-eu-number {
+      width: 50px;
+      height: 50px;
+      border: 3px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+    }
+    .prep-math-eu-lines-wrapper {
+      flex: 1;
+      height: 36px;
+      position: relative;
+    }
+
+    /* Q3: Shapes */
+    .prep-math-shapes-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      margin: 30px auto;
+      width: 95%;
+    }
+    .prep-math-shape-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 30%;
+    }
+    .prep-math-shape-svg {
+      width: 140px;
+      height: 140px;
+    }
+    .prep-math-shape-lines {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .shape-line {
+      display: block;
+      width: 100%;
+      border: none;
+      border-top: 1.5px solid #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Q4: What comes before */
+    .prep-math-before-container {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px auto;
+      width: 80%;
+    }
+    .prep-math-before-col {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .prep-math-before-row {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+    .prep-math-before-box {
+      width: 60px;
+      height: 60px;
+      border: 3px solid #000;
+    }
+    .prep-math-before-num {
+      font-size: 36px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    /* Q5: Count and Write */
+    .prep-math-count-container {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      margin: 20px auto;
+      width: 90%;
+    }
+    .prep-math-count-row {
+      display: grid;
+      grid-template-columns: 300px 100px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .prep-math-count-left {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 5px;
+    }
+    .prep-math-count-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+    .prep-math-circle {
+      width: 20px;
+      height: 20px;
+      border: 3px solid #777;
+      border-radius: 50%;
+      background: #fff;
+      margin: 0 auto;
+    }
+    .prep-math-count-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .prep-math-count-num {
+      font-size: 36px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      width: 30px;
+      text-align: center;
+    }
+
+    /* Q6: Table - PDF style: 5 columns x 10 rows, large centered boxes */
+    .prep-math-table-container {
+      margin: 15px auto;
+      width: 95%;
+      display: flex;
+      justify-content: center;
+    }
+    .prep-math-table-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+    .prep-math-table-grid-box {
+      width: 68px;
+      height: 68px;
+      border: 2px solid #000;
+      background-color: transparent;
+    }
+
+    /* Q7: Circle the Correct Number - PDF style */
+    .prep-math-circle-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin: 10px auto;
+      width: 97%;
+    }
+    .prep-math-circle-card {
+      border: none;
+      padding: 10px 8px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      min-height: 160px;
+      justify-content: space-between;
+    }
+    .prep-math-circle-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+    }
+    .prep-math-circle-images img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    .prep-math-circle-options {
+      display: flex;
+      gap: 20px;
+      margin-top: 8px;
+      align-items: center;
+    }
+    .prep-math-circle-options span {
+      width: auto;
+      height: auto;
+      border: none;
+      border-radius: 0;
+      display: inline;
+      font-size: 28px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      background: transparent;
+      padding: 0 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="paper-content" class="a4-paper">
+    <!-- Top Section -->
+    <div class="top-section">
+      <div class="logo-box">
+        <img src="{% static 'images/logo/images.png' %}" alt="Logo">
+      </div>
+      <div class="school-name">
+        <h1>RAEES GRAMMAR HIGH SCHOOL</h1>
+        <p>Kot Ali Garh Kasur - 0321-5252617</p>
+      </div>
+      <div class="marks-box">
+        <p><b>Total Marks:</b> ______</p>
+        <p><b>Obtained:</b> ______</p>
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <div class="info-line"><span class="info-label">Name:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Class:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Date:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Roll No:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Teacher Sign:</span> <span class="underline"></span></div>
+    </div>
+
+    <table class="question-table">
+      <tr>
+        <th>Question No</th>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <th>Obtained Marks</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <!-- Paper Title -->
+    <div class="paper-title">
+      <span id="paperTitle">Paper {{subject}} Class {{class_name}} {{exam}} {{year}}</span>
+      <button class="edit-btn" id="editBtn">✏️</button>
+      <input type="text" id="titleInput" class="title-input">
+      <button class="save-btn" id="saveBtn">Save</button>
+    </div>
+
+    <div class="my_line"></div>
+
+    <!-- Popup Form -->
+    <div id="formPopup" class="form-popup">
+      <div class="form-content">
+        <span id="closeFormBtn" class="close-btn">&times;</span>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" id="generateBtn" class="submit-btn">Generate Worksheet</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Worksheet Blocks -->
+    <div class="worksheet" id="worksheet">
+
+      {% for question in all_questions %}
+
+      <!-- CASE 1: Counting -->
+      {% if question.heading == "prep_math_counting" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the counting &ldquo;{{ question.start_num }}&rdquo; to &ldquo;{{ question.end_num }}&rdquo;.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-math-counting-grid">
+          {% for b in question.boxes %}
+          <div class="prep-math-counting-box"></div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 2: English and Urdu Counting -->
+      {% if question.heading == "prep_math_english_urdu" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write counting in English and Urdu.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-math-eu-container">
+          {% for row in question.rows %}
+          <div class="prep-math-eu-row">
+            <div class="prep-math-eu-number">{{ row }}</div>
+            <div class="prep-math-eu-lines-wrapper">
+              <div class="nursery-line-1"></div>
+              <div class="nursery-line-2"></div>
+              <div class="nursery-line-3"></div>
+              <div class="nursery-line-4"></div>
+            </div>
+            <div class="prep-math-eu-lines-wrapper">
+              <div class="nursery-line-1"></div>
+              <div class="nursery-line-2"></div>
+              <div class="nursery-line-3"></div>
+              <div class="nursery-line-4"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 3: Shapes -->
+      {% if question.heading == "prep_math_shapes" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the shapes name.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-math-shapes-container">
+          
+          <div class="prep-math-shape-item">
+            <svg class="prep-math-shape-svg" viewBox="0 0 100 100">
+              <rect x="10" y="10" width="80" height="80" fill="none" stroke="black" stroke-width="4"/>
+            </svg>
+            <div class="prep-math-shape-lines">
+              <span class="shape-line"></span>
+              <span class="shape-line"></span>
+              <span class="shape-line"></span>
+              <span class="shape-line"></span>
+            </div>
+          </div>
+
+          <div class="prep-math-shape-item">
+            <svg class="prep-math-shape-svg" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="black" stroke-width="4"/>
+            </svg>
+            <div class="prep-math-shape-lines">
+              <span class="shape-line"></span>
+              <span class="shape-line"></span>
+              <span class="shape-line"></span>
+              <span class="shape-line"></span>
+            </div>
+          </div>
+
+          <div class="prep-math-shape-item">
+            <!-- Symmetric 5-pointed star -->
+            <svg class="prep-math-shape-svg" viewBox="0 0 100 100">
+              <polygon points="50,8 61,36 92,36 68,56 77,84 50,65 23,84 32,56 8,36 39,36" fill="none" stroke="black" stroke-width="4"/>
+            </svg>
+            <div class="prep-math-shape-lines">
+              <span class="shape-line"></span>
+              <span class="shape-line"></span>
+              <span class="shape-line"></span>
+              <span class="shape-line"></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 4: What comes before -->
+      {% if question.heading == "prep_math_before" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. What comes before..
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-math-before-container">
+          <!-- Left Column -->
+          <div class="prep-math-before-col">
+            {% for item in question.before_items %}
+            <div class="prep-math-before-row">
+              <div class="prep-math-before-box"></div>
+              <div class="prep-math-before-num">{{ item.left }}</div>
+            </div>
+            {% endfor %}
+          </div>
+          <!-- Right Column -->
+          <div class="prep-math-before-col">
+            {% for item in question.before_items %}
+            <div class="prep-math-before-row">
+              <div class="prep-math-before-box"></div>
+              <div class="prep-math-before-num">{{ item.right }}</div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 5: Count and Write -->
+      {% if question.heading == "prep_math_count_write" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Count the picture &amp; write the numbers.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-math-count-container">
+          {% for group in question.groups %}
+          <div class="prep-math-count-row">
+            <div class="prep-math-count-left">
+              {% for i in group.range %}
+              <img src="{% static group.image %}" class="prep-math-count-img" alt="pic">
+              {% endfor %}
+            </div>
+            <div class="prep-math-count-right">
+              <div class="prep-math-count-num">{{ group.number }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 6: Write the Table -->
+      {% if question.heading == "prep_math_table" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Write the table of &ldquo;{{ question.table_number }}&rdquo;.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-math-table-container">
+          <!-- 5 columns x 10 rows = 50 boxes, PDF style -->
+          <div class="prep-math-table-grid">
+            {% for i in "12345678901234567890123456789012345678901234567890" %}
+            <div class="prep-math-table-grid-box"></div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 7: Circle the Correct Number -->
+      {% if question.heading == "prep_math_circle_correct" %}
+      <div class="question-wrapper">
+        <h2 class="question-header">
+          Q{{ question.question_no }}. Circle the correct number.
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="prep-math-circle-container">
+          {% for item in question.sub_items %}
+          <div class="prep-math-circle-card">
+            <div class="prep-math-circle-images">
+              {% for x in item.count_range %}
+              <img src="{% static item.image %}" alt="count item">
+              {% endfor %}
+            </div>
+            <div class="prep-math-circle-options">
+              {% for opt in item.options %}
+              <span>{{ opt }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div
+    style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;"
+    class="action-buttons">
+    <button type="button" id="openFormBtn" class="add-btn" style="margin: 0;">+ Add Question</button>
+
+    <button type="button" onclick="generatePDF()" class="download-btn"
+      style="margin: 0; padding: 10px 20px; font-size: 16px; text-decoration: none; color: inherit; display: inline-block;">🖨️ Download PDF</button>
+
+    <form method="post" action="{% url 'reset_prep_math' %}" style="margin: 0;">
+      {% csrf_token %}
+      <button type="submit" class="reset-btn" style="margin: 0;">Reset All</button>
+    </form>
+  </div>
+
+  <!-- JS Files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function generatePDF() {
+      const element = document.getElementById('paper-content');
+
+      const origBorder = element.style.border;
+      const origShadow = element.style.boxShadow;
+      element.style.border = 'none';
+      element.style.boxShadow = 'none';
+      document.body.style.background = '#fff';
+
+      const opt = {
+        margin: [5, 5, 5, 5],
+        filename: 'prep_math_paper.pdf',
+        image: { type: 'jpeg', quality: 1.0 },
+        pagebreak: {
+          mode: ['css', 'legacy']
+        },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          letterRendering: true,
+          scrollX: 0,
+          scrollY: 0
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf()
+        .set(opt)
+        .from(element)
+        .save()
+        .then(() => {
+          element.style.border = origBorder;
+          element.style.boxShadow = origShadow;
+          document.body.style.background = '#e0e0e0';
+        });
+    }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const headingSelect = document.getElementById("id_heading");
+      
+      const startNumField = document.getElementById("id_start_num");
+      const endNumField = document.getElementById("id_end_num");
+      const tableNumberField = document.getElementById("id_table_number");
+      const tableEndField = document.getElementById("id_table_end");
+
+      // Before number fields
+      const beforeFields = [
+        document.getElementById("id_before_n1"),
+        document.getElementById("id_before_n2"),
+        document.getElementById("id_before_n3"),
+        document.getElementById("id_before_n4"),
+        document.getElementById("id_before_n5"),
+        document.getElementById("id_before_n6"),
+        document.getElementById("id_before_n7"),
+        document.getElementById("id_before_n8"),
+        document.getElementById("id_before_n9"),
+        document.getElementById("id_before_n10"),
+      ].filter(Boolean);
+
+      function updateFields() {
+        const selectedValue = headingSelect.value;
+        
+        // Counting fields
+        if (selectedValue === "prep_math_counting") {
+          if (startNumField) startNumField.parentElement.style.display = "block";
+          if (endNumField) endNumField.parentElement.style.display = "block";
+          if (tableNumberField) tableNumberField.parentElement.style.display = "none";
+          if (tableEndField) tableEndField.parentElement.style.display = "none";
+          beforeFields.forEach(field => {
+            if (field) field.parentElement.style.display = "none";
+          });
+        }
+        // Table fields
+        else if (selectedValue === "prep_math_table") {
+          if (startNumField) startNumField.parentElement.style.display = "none";
+          if (endNumField) endNumField.parentElement.style.display = "none";
+          if (tableNumberField) tableNumberField.parentElement.style.display = "block";
+          if (tableEndField) tableEndField.parentElement.style.display = "block";
+          beforeFields.forEach(field => {
+            if (field) field.parentElement.style.display = "none";
+          });
+        }
+        // Before fields
+        else if (selectedValue === "prep_math_before") {
+          if (startNumField) startNumField.parentElement.style.display = "none";
+          if (endNumField) endNumField.parentElement.style.display = "none";
+          if (tableNumberField) tableNumberField.parentElement.style.display = "none";
+          if (tableEndField) tableEndField.parentElement.style.display = "none";
+          beforeFields.forEach(field => {
+            if (field) field.parentElement.style.display = "block";
+          });
+        }
+        // Default: hide all optional fields
+        else {
+          if (startNumField) startNumField.parentElement.style.display = "none";
+          if (endNumField) endNumField.parentElement.style.display = "none";
+          if (tableNumberField) tableNumberField.parentElement.style.display = "none";
+          if (tableEndField) tableEndField.parentElement.style.display = "none";
+          beforeFields.forEach(field => {
+            if (field) field.parentElement.style.display = "none";
+          });
+        }
+      }
+
+      if (headingSelect) {
+        updateFields();
+        headingSelect.addEventListener("change", updateFields);
+      }
+    });
+  </script>
+  <script src="{% static 'Paper_js/paper_tamp1.js' %}"></script>
+  <script src="{% static 'Paper_js/paper_tamp.js' %}"></script>
+  <script src="{% static 'Paper_js/reset.js' %}"></script>
+</body>
+
+</html>

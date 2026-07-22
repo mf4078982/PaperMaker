@@ -1,0 +1,460 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Nursery G.K, Poem & Speech Paper Generator</title>
+  <link rel="stylesheet" href="{% static 'Paper_css/style.css' %}?v=9">
+  <style>
+    /* ===== G.K, Poem & Speech Specific Styles ===== */
+
+    /* Section Header (e.g., "1 G. Knowledge /30") */
+    .gk-section-header {
+      display: flex;
+      align-items: center;
+      margin: 12px 0 8px 0;
+      padding: 0;
+    }
+    .gk-section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: #000;
+      color: #fff;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 14px;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+    .gk-section-title {
+      font-size: 20px;
+      font-weight: bold;
+      flex-grow: 1;
+    }
+    .gk-section-marks {
+      font-size: 18px;
+      font-weight: bold;
+      margin-left: auto;
+    }
+
+    /* G.K Question Row */
+    .gk-question-row {
+      display: flex;
+      align-items: baseline;
+      margin: 6px 0 6px 40px;
+      font-size: 15px;
+    }
+    .gk-question-text {
+      flex-grow: 1;
+    }
+    .gk-question-marks {
+      font-weight: bold;
+      margin-left: 15px;
+      min-width: 30px;
+      text-align: right;
+    }
+
+    /* Urdu Question Row (RTL) */
+    .gk-urdu-question-row {
+      display: flex;
+      align-items: baseline;
+      margin: 6px 40px 6px 0;
+      font-size: 16px;
+      direction: rtl;
+      font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif;
+    }
+    .gk-urdu-question-text {
+      flex-grow: 1;
+      text-align: right;
+    }
+    .gk-urdu-question-marks {
+      font-weight: bold;
+      margin-right: 15px;
+      min-width: 30px;
+      text-align: left;
+      direction: ltr;
+    }
+    .gk-urdu-question-no {
+      font-weight: bold;
+      margin-left: 8px;
+      direction: ltr;
+    }
+
+    /* Answer Lines (for writing space) */
+    .gk-answer-lines {
+      margin: 8px 40px 15px 40px;
+    }
+    .gk-answer-line {
+      border-bottom: 1px solid #999;
+      height: 28px;
+      margin-bottom: 2px;
+    }
+
+    /* Speech Section */
+    .speech-topic {
+      display: flex;
+      align-items: baseline;
+      font-size: 15px;
+      font-weight: bold;
+      margin: 8px 0 5px 40px;
+    }
+    .speech-topic-marks {
+      font-weight: bold;
+      margin-left: auto;
+      min-width: 30px;
+      text-align: right;
+    }
+
+    /* Poem Section */
+    .poem-sub-header {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 8px 0 5px 0;
+      text-decoration: underline;
+    }
+    .poem-option-row {
+      display: flex;
+      align-items: baseline;
+      margin: 5px 0 3px 40px;
+      font-size: 15px;
+    }
+    .poem-option-text {
+      font-weight: bold;
+    }
+    .poem-option-marks {
+      font-weight: bold;
+      margin-left: auto;
+      min-width: 30px;
+      text-align: right;
+    }
+    .poem-or {
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      margin: 2px 0 2px 40px;
+    }
+
+    /* Urdu Poem */
+    .poem-urdu-option-row {
+      display: flex;
+      align-items: baseline;
+      margin: 5px 40px 3px 0;
+      font-size: 16px;
+      direction: rtl;
+      font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif;
+    }
+    .poem-urdu-option-text {
+      font-weight: bold;
+      text-align: right;
+    }
+    .poem-urdu-option-marks {
+      font-weight: bold;
+      margin-right: auto;
+      min-width: 30px;
+      text-align: left;
+      direction: ltr;
+    }
+    .poem-urdu-or {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 2px 40px 2px 0;
+      direction: rtl;
+      font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif;
+    }
+
+    /* Urdu answer lines (RTL) */
+    .gk-urdu-answer-lines {
+      margin: 8px 40px 15px 40px;
+      direction: rtl;
+    }
+    .gk-urdu-answer-line {
+      border-bottom: 1px solid #999;
+      height: 28px;
+      margin-bottom: 2px;
+    }
+
+    /* Override worksheet center alignment for GK paper */
+    .worksheet {
+      text-align: left;
+      margin: 10px auto;
+      padding: 0;
+    }
+
+    @media print {
+      .gk-section-number {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Paper Content Wrapper -->
+  <div id="paper-content" class="a4-paper">
+    <!-- Top Section -->
+    <div class="top-section">
+      <div class="logo-box">
+        <img src="{% static 'images/logo/images.png' %}" alt="Logo">
+      </div>
+      <div class="school-name">
+        <h1>RAEES GRAMMAR HIGH SCHOOL</h1>
+        <p>Kot Ali Garh Kasur - 0321-5252617</p>
+      </div>
+      <div class="marks-box">
+        <p><b>Total Marks:</b> ______</p>
+        <p><b>Obtained:</b> ______</p>
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <div class="info-line"><span class="info-label">Name:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Class:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Date:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Roll No:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Teacher Sign:</span> <span class="underline"></span></div>
+    </div>
+
+    <table class="question-table">
+      <tr>
+        <th>Question No</th>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <th>Obtained Marks</th>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <!-- Paper Title -->
+    <div class="paper-title">
+      <span id="paperTitle">Paper {{subject}} Class {{class_name}} {{exam}} {{year}}</span>
+      <button class="edit-btn" id="editBtn">✏️</button>
+      <input type="text" id="titleInput" class="title-input">
+      <button class="save-btn" id="saveBtn">Save</button>
+    </div>
+
+    <div class="my_line"></div>
+
+    <!-- Popup Form -->
+    <div id="formPopup" class="form-popup">
+      <div class="form-content">
+        <span id="closeFormBtn" class="close-btn">&times;</span>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" id="generateBtn" class="submit-btn">Add to Paper</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Worksheet Blocks -->
+    <div class="worksheet" id="worksheet">
+
+      {% for question in all_questions %}
+      <!-- CASE 0: G.K Section Header -->
+      {% if question.heading == "gk_header" %}
+      <div class="question-wrapper">
+        <div class="gk-section-header">
+          <span class="gk-section-number">{{ question.question_no }}</span>
+          <span class="gk-section-title">G. Knowledge</span>
+          <span class="gk-section-marks">/{{ question.marks }}</span>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 1: G.K English Question -->
+      {% if question.heading == "gk_section" %}
+      <div class="question-wrapper">
+        <div class="gk-question-row">
+          <span class="gk-question-text">Q.{{ question.question_no }}: {{ question.question_text }}</span>
+          <span class="gk-question-marks">/{{ question.marks }}</span>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 2: G.K Urdu Question -->
+      {% if question.heading == "gk_urdu_section" %}
+      <div class="question-wrapper">
+        <div class="gk-urdu-question-row">
+          <span class="gk-urdu-question-no">Q.{{ question.question_no }}</span>
+          <span class="gk-urdu-question-text">{{ question.question_text }}</span>
+          <span class="gk-urdu-question-marks">/{{ question.marks }}</span>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 3: Speech Section -->
+      {% if question.heading == "speech_section" %}
+      <div class="question-wrapper">
+        <div class="gk-section-header">
+          <span class="gk-section-number">{{ question.question_no }}</span>
+          <span class="gk-section-title">Speech</span>
+          <span class="gk-section-marks">/{{ question.marks }}</span>
+        </div>
+        <div class="speech-topic">
+          {{ question.speech_title }}
+          <span class="speech-topic-marks">/{{ question.marks }}</span>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CASE 4: Poem English Section -->
+      {% if question.heading == "poem_english_section" %}
+      <div class="question-wrapper">
+        <div class="gk-section-header">
+          <span class="gk-section-number">{{ question.question_no }}</span>
+          <span class="gk-section-title">Poem</span>
+          <span class="gk-section-marks">/{{ question.marks }}</span>
+        </div>
+        <div class="poem-sub-header">English Rhymes</div>
+        <div class="poem-option-row">
+          <span class="poem-option-text">Q.1: {{ question.poem_option1 }}</span>
+          <span class="poem-option-marks">/{{ question.marks }}</span>
+        </div>
+        {% if question.poem_option2 %}
+        <div class="poem-or">or</div>
+        <div class="poem-option-row">
+          <span class="poem-option-text">{{ question.poem_option2 }}</span>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <!-- CASE 5: Poem Urdu Section -->
+      {% if question.heading == "poem_urdu_section" %}
+      <div class="question-wrapper">
+        <div class="poem-urdu-option-row">
+          <span class="poem-urdu-option-text">{{ question.poem_option1 }}</span>
+          <span class="poem-urdu-option-marks">/{{ question.marks }}</span>
+        </div>
+        {% if question.poem_option2 %}
+        <div class="poem-urdu-or">یا</div>
+        <div class="poem-urdu-option-row">
+          <span class="poem-urdu-option-text">{{ question.poem_option2 }}</span>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div
+    style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;"
+    class="action-buttons">
+    <button type="button" id="openFormBtn" class="add-btn" style="margin: 0;">+ Add Question</button>
+
+    <button type="button" onclick="generatePDF()" class="download-btn"
+      style="margin: 0; padding: 10px 20px; font-size: 16px; text-decoration: none; color: inherit; display: inline-block;">🖨️ Download PDF</button>
+
+    <form method="post" action="{% url 'reset_nursery_gk' %}" style="margin: 0;">
+      {% csrf_token %}
+      <button type="submit" class="reset-btn" style="margin: 0;">Reset All</button>
+    </form>
+  </div>
+
+  <!-- JS Files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function generatePDF() {
+      const element = document.getElementById('paper-content');
+
+      const origBorder = element.style.border;
+      const origShadow = element.style.boxShadow;
+      element.style.border = 'none';
+      element.style.boxShadow = 'none';
+      document.body.style.background = '#fff';
+
+      const opt = {
+        margin: [5, 5, 5, 5],
+        filename: 'nursery_gk_poem_speech_paper.pdf',
+        image: { type: 'jpeg', quality: 1.0 },
+        pagebreak: {
+          mode: ['css', 'legacy']
+        },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          letterRendering: true,
+          scrollX: 0,
+          scrollY: 0
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf()
+        .set(opt)
+        .from(element)
+        .save()
+        .then(() => {
+          element.style.border = origBorder;
+          element.style.boxShadow = origShadow;
+          document.body.style.background = '#e0e0e0';
+        });
+    }
+
+    // Show/hide fields based on section type selection
+    document.addEventListener('DOMContentLoaded', function() {
+      const headingSelect = document.getElementById('id_heading');
+      if (!headingSelect) return;
+
+      const fieldGroups = {
+        'gk_section': ['id_gk_question'],
+        'gk_urdu_section': ['id_gk_urdu_question'],
+        'speech_section': ['id_speech_topic'],
+        'poem_english_section': ['id_poem_english_option1', 'id_poem_english_option2'],
+        'poem_urdu_section': ['id_poem_urdu_option1', 'id_poem_urdu_option2'],
+      };
+
+      const allFieldIds = [
+        'id_gk_question', 'id_gk_urdu_question', 'id_speech_topic',
+        'id_poem_english_option1', 'id_poem_english_option2',
+        'id_poem_urdu_option1', 'id_poem_urdu_option2'
+      ];
+
+      function toggleFields() {
+        const selected = headingSelect.value;
+
+        // Hide all optional fields
+        allFieldIds.forEach(function(fid) {
+          const el = document.getElementById(fid);
+          if (el && el.closest('p')) {
+            el.closest('p').style.display = 'none';
+          }
+        });
+
+        // Show relevant fields
+        if (fieldGroups[selected]) {
+          fieldGroups[selected].forEach(function(fid) {
+            const el = document.getElementById(fid);
+            if (el && el.closest('p')) {
+              el.closest('p').style.display = '';
+            }
+          });
+        }
+      }
+
+      headingSelect.addEventListener('change', toggleFields);
+      toggleFields(); // Run on load
+    });
+  </script>
+  <script src="{% static 'Paper_js/paper_tamp1.js' %}"></script>
+  <script src="{% static 'Paper_js/paper_tamp.js' %}"></script>
+  <script src="{% static 'Paper_js/reset.js' %}"></script>
+</body>
+
+</html>

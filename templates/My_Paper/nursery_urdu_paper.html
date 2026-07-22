@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Nursery Urdu Paper Generator</title>
+  <link rel="stylesheet" href="{% static 'Paper_css/style.css' %}?v=13">
+</head>
+
+<body>
+  <div id="paper-content" class="a4-paper">
+    <div class="top-section">
+      <div class="logo-box">
+        <img src="{% static 'images/logo/images.png' %}" alt="Logo">
+      </div>
+      <div class="school-name">
+        <h1>RAEES GRAMMAR HIGH SCHOOL</h1>
+        <p>Kot Ali Garh Kasur - 0321-5252617</p>
+      </div>
+      <div class="marks-box">
+        <p><b>Total Marks:</b> ______</p>
+        <p><b>Obtained:</b> ______</p>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-line"><span class="info-label">Name:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Class:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Date:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Roll No:</span> <span class="underline"></span></div>
+      <div class="info-line"><span class="info-label">Teacher Sign:</span> <span class="underline"></span></div>
+    </div>
+
+    <table class="question-table">
+      <tr>
+        <th>Question No</th>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <th>Obtained Marks</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <div class="paper-title">
+      <span id="paperTitle">Paper {{subject}} Class {{class_name}} {{exam}} {{year}}</span>
+      <button class="edit-btn" id="editBtn">✏️</button>
+      <input type="text" id="titleInput" class="title-input">
+      <button class="save-btn" id="saveBtn">Save</button>
+    </div>
+
+    <div class="my_line"></div>
+
+    <div id="formPopup" class="form-popup">
+      <div class="form-content">
+        <span id="closeFormBtn" class="close-btn">&times;</span>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" id="generateBtn" class="submit-btn">Generate Worksheet</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="worksheet nursery-urdu-worksheet" id="worksheet" dir="rtl">
+      {% for question in all_questions %}
+
+      {% if question.heading == "nursery_urdu_write_alphabet" %}
+      <div class="question-wrapper nursery-urdu-question">
+        <h2 class="question-header nursery-urdu-header" data-open-form="true">
+          <span class="nursery-urdu-qno">{{ question.question_no }}</span>
+          <span class="nursery-urdu-title">خوش خط حروفِ تہجی لکھیں۔ ({{ question.start_letter }} تا {{ question.end_letter }})</span>
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="nursery-urdu-lines">
+          {% for row in question.rows_data %}
+          <div class="nursery-urdu-writing-row">
+            {% for letter in row %}
+            <span class="nursery-urdu-dot"></span>
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if question.heading == "nursery_urdu_matching" %}
+      <div class="question-wrapper nursery-urdu-question">
+        <h2 class="question-header nursery-urdu-header" data-open-form="true">
+          <span class="nursery-urdu-qno">{{ question.question_no }}</span>
+          <span class="nursery-urdu-title">حروف کو آپس میں ملائیں</span>
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="nursery-urdu-match">
+          <div class="nursery-urdu-match-col">
+            {% for letter in question.right_letters %}
+            <div class="nursery-urdu-match-letter">{{ letter }}</div>
+            {% endfor %}
+          </div>
+          <div class="nursery-urdu-match-col">
+            {% for letter in question.left_letters %}
+            <div class="nursery-urdu-match-letter">{{ letter }}</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if question.heading == "nursery_urdu_after_letters" %}
+      <div class="question-wrapper nursery-urdu-question">
+        <h2 class="question-header nursery-urdu-header" data-open-form="true">
+          <span class="nursery-urdu-qno">{{ question.question_no }}</span>
+          <span class="nursery-urdu-title">بعد میں آنے والے حروف لکھیں۔</span>
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="nursery-urdu-after-container">
+          {% for item in question.items %}
+          <div class="nursery-urdu-after-item">
+            <span class="nursery-urdu-after-letter">{{ item.letter }}</span>
+            <div class="nursery-urdu-after-box"></div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if question.heading == "nursery_urdu_picture_matching" %}
+      <div class="question-wrapper nursery-urdu-question">
+        <h2 class="question-header nursery-urdu-header" data-open-form="true">
+          <span class="nursery-urdu-qno">{{ question.question_no }}</span>
+          <span class="nursery-urdu-title">حروف کو تصویروں کے ساتھ ملائیں۔</span>
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="nursery-urdu-pic-match">
+          <div class="nursery-urdu-pic-match-col">
+            {% for letter in question.right_letters %}
+            <div class="nursery-urdu-pic-match-letter">{{ letter }}</div>
+            {% endfor %}
+          </div>
+          <div class="nursery-urdu-pic-match-col">
+            {% for img in question.left_images %}
+            <div class="nursery-urdu-pic-match-image">
+              <img src="{% static img %}" alt="vocab-img">
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if question.heading == "nursery_urdu_put_dots" %}
+      <div class="question-wrapper nursery-urdu-question">
+        <h2 class="question-header nursery-urdu-header" data-open-form="true">
+          <span class="nursery-urdu-qno">{{ question.question_no }}</span>
+          <span class="nursery-urdu-title">حروف کے نقطے لگائیں۔</span>
+          <span class="marks">/{{ question.marks }}</span>
+        </h2>
+        <div class="nursery-urdu-dots-container">
+          {% for row in question.rows %}
+          <div class="nursery-urdu-dots-row">
+            {% for letter in row %}
+            <span class="nursery-urdu-dots-letter">{{ letter }}</span>
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% endfor %}
+    </div>
+  </div>
+
+  <div
+    style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;"
+    class="action-buttons">
+    <button type="button" id="openFormBtn" class="add-btn" style="margin: 0;">+ Add Question</button>
+    <button type="button" onclick="generatePDF()" class="download-btn"
+      style="margin: 0; padding: 10px 20px; font-size: 16px;">Download PDF</button>
+    <form method="post" action="{% url 'reset_nursery_urdu' %}" style="margin: 0;">
+      {% csrf_token %}
+      <button type="submit" class="reset-btn" style="margin: 0;">Reset All</button>
+    </form>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function generatePDF() {
+      const element = document.getElementById('paper-content');
+      const origBorder = element.style.border;
+      const origShadow = element.style.boxShadow;
+      element.style.border = 'none';
+      element.style.boxShadow = 'none';
+      document.body.style.background = '#fff';
+
+      const opt = {
+        margin: [5, 5, 5, 5],
+        filename: 'nursery_urdu_paper.pdf',
+        image: { type: 'jpeg', quality: 1.0 },
+        pagebreak: { mode: ['css', 'legacy'] },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          letterRendering: true,
+          scrollX: 0,
+          scrollY: 0
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf()
+        .set(opt)
+        .from(element)
+        .save()
+        .then(() => {
+          element.style.border = origBorder;
+          element.style.boxShadow = origShadow;
+          document.body.style.background = '#e0e0e0';
+        });
+    }
+  </script>
+  <script src="{% static 'Paper_js/paper_tamp1.js' %}"></script>
+  <script src="{% static 'Paper_js/paper_tamp.js' %}"></script>
+  <script src="{% static 'Paper_js/reset.js' %}"></script>
+</body>
+
+</html>
